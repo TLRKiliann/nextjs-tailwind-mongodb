@@ -1,6 +1,21 @@
 import React from 'react'
 
-export default function ProductItem({ product }) {
+type ProductProps = {
+  product: {
+    name: string,
+    slug: string,
+    category: string,
+    image: string,
+    price: number,
+    brand: string,
+    rating: number,
+    numReviews: number,
+    countInStock: number,
+    description: string
+  }
+}
+
+export default function ProductItem({ product }: ProductProps) {
   return (
     <div className="card">
       <a href={`/product/${product.slug}`}>
