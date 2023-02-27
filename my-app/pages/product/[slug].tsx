@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import data from '../../utils/data'
+import { Store } from '../../utils/Store'
 
 export default function ProductScreen() {
+
+  const { state, dispatch } = useContext(Store)
 
   const { query } = useRouter() as any
   const { slug } = query
@@ -14,6 +17,12 @@ export default function ProductScreen() {
 
   if (!product) {
     return <div>Product Not Found</div>
+  }
+
+  const addToCartHandler = () => {
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
   }
 
   return (
@@ -60,6 +69,7 @@ export default function ProductScreen() {
 
             <button
               type='button'
+              onClick={addToCartHandler}
               className="primary-button w-full"
             >
               Add to cart

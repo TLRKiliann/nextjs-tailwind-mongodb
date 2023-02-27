@@ -52,8 +52,27 @@ Interact with db in utils/data.ts and called by index.tsx
 
 ---
 
-5. ProductId
+5. pages/product/[slug].tsx
 
+To display product by name & access to it by a new route.
 
+---
+
+6. Handle add to Cart
+
+- define react context
+- define cart item state
+- create add to cart action
+- add reducer
+- create store provider
+- handle add to cart button
+
+utils/Store
+
+pages/product/[slug].tsx
+
+components/Layout.tsx
+
+01:24 durée
 
 ---
