@@ -5,7 +5,7 @@ import { Store } from '../utils/Store'
 export default function Layout({ title, children }: any) {
 
   const { state, dispatch } = useContext(Store)
-  const { Cart } = state
+  const { cart } = state
   
   return (
     <>
@@ -28,7 +28,7 @@ export default function Layout({ title, children }: any) {
               {cart.cartItems.length > 0 && (
                 <span className="ml-1 rounded-full bgg-red-600 px-2 py-1 
                   text-xs font-bold text-white">
-                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  {cart.cartItems.reduce((a: any, c: { quantity: any }) => a + c.quantity, 0)}
                 </span>
               )}
               </a>
