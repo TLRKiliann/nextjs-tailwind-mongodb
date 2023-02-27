@@ -32,3 +32,24 @@ Look at :
 
 3. Layout
 
+components/Layout.tsx
+
+Head set for all pages
+
+header (with navbar)
+
+main
+
+footer
+
+---
+
+4. Product
+
+components/ProductItem.tsx
+
+Interact with db in utils/data.ts and called by index.tsx
+
+---
+
+5. 
