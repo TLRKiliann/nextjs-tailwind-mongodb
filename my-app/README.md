@@ -73,6 +73,4 @@ pages/product/[slug].tsx
 
 components/Layout.tsx
 
-01:24 durée
-
 ---
