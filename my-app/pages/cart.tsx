@@ -2,18 +2,25 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/Layout'
-import { Store } from '../utils/Store'
+import { Store, Action, ActionType, State } from '../utils/Store'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 
-export default function CartScreen() {
+interface CartItem {
+  slug: string;
+  image: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
 
-  const { state, action } = useContext(Store)
-  
+export default function CartScreen() {
+  const { state, dispatch } = useContext<React.ReducerContext<React.Reducer<State, Action>>>(Store)
+
   const { 
-    cart: { cartItems }, 
+    cart: { cartItems },
   } = state;
 
-  const removeItemHandler = (item) => {
+  const removeItemHandler = (item: CartItem) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   }
 
@@ -42,7 +49,7 @@ export default function CartScreen() {
                   <tr key={item.slug} className="border-b">
                     <td>
                       <Link href={`/product/${item.slug}`}>
-                        <a className="flex items-center">
+                        <div className="flex items-center">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -52,7 +59,7 @@ export default function CartScreen() {
                           </Image>
                           &nbsp;
                           {item.name}
-                        </a>
+                        </div>
                       </Link>
                     </td>
                     <td className="p-5 text-right">
