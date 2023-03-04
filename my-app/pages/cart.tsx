@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/Layout'
 import { Store, Action, ActionType, State } from '../utils/Store'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
+import dynamic from 'next/dynamic'
 
 interface CartItem {
   slug: string;
@@ -11,17 +13,22 @@ interface CartItem {
   name: string;
   quantity: number;
   price: number;
+  countInStock: number;
 }
 
-export default function CartScreen() {
+function CartScreen() {
   const { state, dispatch } = useContext<React.ReducerContext<React.Reducer<State, Action>>>(Store)
-
+  const router = useRouter();
   const { 
     cart: { cartItems },
   } = state;
 
   const removeItemHandler = (item: CartItem) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  }
+  const updateCartHandler = (item: CartItem, qty: string) => {
+    const quantity = Number(qty);
+    dispatch({type:'CART_ADD_ITEM', payload:{...item, quantity}})
   }
 
   return (
@@ -66,6 +73,17 @@ export default function CartScreen() {
                       {item.quantity}
                     </td>
                     <td className="p-5 text-right">
+                      <select value={item.quantity} onChange={(e) => updateCartHandler(item, e.target.value)}>
+                      {
+                        [...Array(item.countInStock).keys()].map((x: number) => (
+                          <option key={x+1} value={x+1}>
+                            {x + 1}
+                          </option>
+                        ))
+                      }
+                      </select>
+                    </td>
+                    <td className="p-5 text-right">
                       {item.price}
                     </td>
                     <td className="p-5 text-center">
@@ -78,9 +96,25 @@ export default function CartScreen() {
               </tbody>
             </table>
           </div>
+          <div className="card p-5">
+            <ul>
+              <li>
+                <div className="pb-3 text-xl">
+                  Subtotal {cartItems.reduce((a, c) => a + c.quantity, 0)} : $
+                  {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                </div>
+              </li>
+              <li>
+                <button
+                  onClick={() => router.push('/shipping')}
+                  className="primary-button w-full">Check Out</button>
+              </li>
+            </ul>
+          </div>
         </div>
         )
       }
     </Layout>
   )
 }
+//export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))

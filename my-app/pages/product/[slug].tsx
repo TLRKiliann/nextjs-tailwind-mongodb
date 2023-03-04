@@ -6,21 +6,38 @@ import Image from 'next/image'
 import data from '../../utils/data'
 import { Store } from '../../utils/Store'
 
-export default function ProductScreen() {
+interface SubProductProduct {
+  slug: string;
+  name: string;
+  category: string;
+  brand: string;
+  image: string;
+  price: number;
+  countInStock: number;
+  description: string;
+  rating: number;
+  numReviews: number;
+}
 
-  const { state, dispatch } = useContext(Store)
+interface ProductProps {
+  product: SubProductProps;
+}
+
+export default function ProductScreen() {
+  const { state, dispatch } = useContext<React.Reducer<any, Action>>(Store);
+  //const { state, dispatch } = useContext(Store)
   const router = useRouter() as any
   const { query } = useRouter() as any
   const { slug } = query as {slug: string}
 
-  const product = data.products.find(x => x.slug === slug)
+  const product: ProductProps = data.products.find(x => x.slug === slug)
 
   if (!product) {
     return <div>Product Not Found</div>
   }
 
   const addToCartHandler = () => {
-    const existItem = state.cart.cartItems.find((x: any) => x.slug === product.slug)
+    const existItem = state.cart.cartItems.find((x: Product) => x.slug === product.slug)
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product.countInStock < quantity) {
       alert("Sorry no more in stock")

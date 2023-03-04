@@ -1,12 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import { Store } from '../utils/Store'
+
+interface Props {
+  title?: string;
+  children: React.ReactNode;
+}
 
 export default function Layout({ title, children }) {
 
   const { state } = useContext(Store)
   const { cart } = state
-  
+  const [cartItemsCount, setCartItemsCount] = useState<number>(0)
+  useEffect(() => {
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
+  }, [cart.cartItems])
   return (
     <>
 
@@ -25,10 +33,10 @@ export default function Layout({ title, children }) {
             </a>
             <div>
               <a href="/cart" className="p-2">Cart
-              {cart.cartItems.length > 0 && (
+              {cartItemsCount > 0 && (
                 <span className="ml-1 rounded-full bgg-red-600 px-2 py-1 
                   text-xs font-bold text-white">
-                  {cart.cartItems.reduce((a: any, c: any) => a + c.quantity, 0)}
+                  {cartItemsCount}
                 </span>
               )}
               </a>
