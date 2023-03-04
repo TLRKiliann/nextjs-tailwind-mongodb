@@ -1,4 +1,5 @@
-import { createContext, useReducer, ReactNode } from 'react';
+import { createContext, useReducer, ReactNode, Dispatch } from 'react';
+import Cookie from 'js-cookie';
 
 interface Item {
   quantity: number;
@@ -15,19 +16,21 @@ interface State {
 }
 
 interface Action {
-  type: string;
+  type: 'CART_ADD_ITEM' | 'CART_REMOVE_ITEM';
   payload?: Item;
 }
 
 interface StoreContextValue {
   state: State;
-  dispatch: React.Dispatch<Action>;
+  dispatch: Dispatch<Action>;
 }
 
 export const Store = createContext<StoreContextValue | undefined>(undefined);
 
 const initialState: State = {
-  cart: { cartItems: [] },
+  cart: Cookie.get('cart')
+    ? JSON.parse(Cookie.get('cart'))
+    : { cartItems: [] },
 };
 
 function reducer(state: State, action: Action): State {
@@ -35,16 +38,16 @@ function reducer(state: State, action: Action): State {
     case 'CART_ADD_ITEM': {
       const newItem = action.payload!;
       const existItem = state.cart.cartItems.find((item) => item.slug === newItem.slug);
-      const cartItems = existItem 
+      const cartItems = existItem
         ? state.cart.cartItems.map((item) => (item.name === existItem.name ? newItem : item))
         : [...state.cart.cartItems, newItem];
-      return { ...state, cart: {...state.cart, cartItems} };
+      Cookie.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_REMOVE_ITEM': {
-      const cartItems = state.cart.cartItems.filter(
-        (item) => item.slug !== action.payload!.slug
-      );
-      return { ...state, cart: { ...state.cart, cartItems}};
+      const cartItems = state.cart.cartItems.filter((item) => item.slug !== action.payload!.slug);
+      Cookie.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:
       return state;

@@ -7,6 +7,7 @@ specifiers:
   autoprefixer: ^10.4.13
   eslint: 8.35.0
   eslint-config-next: 13.2.1
+  js-cookie: ^3.0.1
   next: 13.2.1
   next-themes: ^0.2.1
   postcss: ^8.4.21
@@ -22,6 +23,7 @@ dependencies:
   '@types/react-dom': 18.0.11
   eslint: 8.35.0
   eslint-config-next: 13.2.1_ycpbpc6yetojsgtrx3mwntkhsu
+  js-cookie: 3.0.1
   next: 13.2.1_biqbaboplfbrettd7655fr4n2y
   next-themes: 0.2.1_qgtcjgzkkjtbiyvnx7d32fl5vu
   react: 18.2.0
@@ -1569,6 +1571,11 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
     dev: false
 
   /js-sdsl/4.3.0:
