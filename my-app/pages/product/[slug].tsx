@@ -6,7 +6,7 @@ import Image from 'next/image'
 import data from '../../utils/data'
 import { Store } from '../../utils/Store'
 
-interface SubProductProduct {
+interface SubProductProps {
   slug: string;
   name: string;
   category: string;
@@ -24,8 +24,8 @@ interface ProductProps {
 }
 
 export default function ProductScreen() {
-  const { state, dispatch } = useContext<React.Reducer<any, Action>>(Store);
-  //const { state, dispatch } = useContext(Store)
+  //const { state, dispatch } = useContext<React.Reducer<any, Action>>(Store);
+  const { state, dispatch } = useContext(Store)
   const router = useRouter() as any
   const { query } = useRouter() as any
   const { slug } = query as {slug: string}

@@ -16,7 +16,7 @@ interface CartItem {
   countInStock: number;
 }
 
-function CartScreen() {
+export default function CartScreen() {
   const { state, dispatch } = useContext<React.ReducerContext<React.Reducer<State, Action>>>(Store)
   const router = useRouter();
   const { 
@@ -53,7 +53,7 @@ function CartScreen() {
               </thead>
               <tbody>
                 {cartItems.map((item) => (
-                  <tr key={item.slug} className="border-b">
+                  <tr key={item.slug} className="border">
                     <td>
                       <Link href={`/product/${item.slug}`}>
                         <div className="flex items-center">
@@ -69,10 +69,10 @@ function CartScreen() {
                         </div>
                       </Link>
                     </td>
-                    <td className="p-5 text-right">
+                    <td className="pl-10 text-left">
                       {item.quantity}
                     </td>
-                    <td className="p-5 text-right">
+                    <td className="p-5 text-left">
                       <select value={item.quantity} onChange={(e) => updateCartHandler(item, e.target.value)}>
                       {
                         [...Array(item.countInStock).keys()].map((x: number) => (
@@ -83,7 +83,7 @@ function CartScreen() {
                       }
                       </select>
                     </td>
-                    <td className="p-5 text-right">
+                    <td className="p-5 text-center">
                       {item.price}
                     </td>
                     <td className="p-5 text-center">
@@ -117,4 +117,4 @@ function CartScreen() {
     </Layout>
   )
 }
-export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))
+//export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))
