@@ -26,7 +26,7 @@ const data = {
     },
     {
       name: "Golf Pant",
-      slug: "golf-Pant",
+      slug: "golf-pant",
       category: "Pants",
       image: "/images/pant1.jpg",
       price: 130,
@@ -38,7 +38,7 @@ const data = {
     },
     {
       name: "Fit Pant",
-      slug: "fit-Pant",
+      slug: "fit-pant",
       category: "Pants",
       image: "/images/pant2.jpg",
       price: 140,
