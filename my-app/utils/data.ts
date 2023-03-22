@@ -1,6 +1,31 @@
 import bcrypt from 'bcryptjs';
 
-const data = {
+interface User {
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+}
+
+interface Product {
+  name: string;
+  slug: string;
+  category: string;
+  image: string;
+  price: number;
+  brand: string;
+  rating: number;
+  numReviews: number;
+  countInStock: number;
+  description: string;
+}
+
+interface Data {
+  users: User[];
+  products: Product[];
+}
+
+const data: Data = {
   users: [
     {
       name: 'esteban',
