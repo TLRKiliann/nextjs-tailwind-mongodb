@@ -24,7 +24,6 @@ interface ProductProps {
 }
 
 export default function ProductScreen() {
-  //const { state, dispatch } = useContext<React.Reducer<any, Action>>(Store);
   const { state, dispatch } = useContext(Store)
   const router = useRouter() as any
   const { query } = useRouter() as any
