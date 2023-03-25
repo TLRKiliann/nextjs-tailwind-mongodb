@@ -1,4 +1,45 @@
-const data = {
+import bcrypt from 'bcryptjs';
+
+interface User {
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+}
+
+interface Product {
+  name: string;
+  slug: string;
+  category: string;
+  image: string;
+  price: number;
+  brand: string;
+  rating: number;
+  numReviews: number;
+  countInStock: number;
+  description: string;
+}
+
+interface Data {
+  users: User[];
+  products: Product[];
+}
+
+const data: Data = {
+  users: [
+    {
+      name: 'esteban',
+      email: 'cat.3st3ban@gmail.com',
+      password: bcrypt.hashSync('8FsD1vs7bnLZU9ZF'),
+      isAdmin: true,
+    },
+    {
+      name: 'celestine',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('123456'),
+      isAdmin: false,
+    }
+  ],
   products: [
     {
       name: "Free Shirt",
@@ -26,7 +67,7 @@ const data = {
     },
     {
       name: "Golf Pant",
-      slug: "golf-Pant",
+      slug: "golf-pant",
       category: "Pants",
       image: "/images/pant1.jpg",
       price: 130,
@@ -38,7 +79,7 @@ const data = {
     },
     {
       name: "Fit Pant",
-      slug: "fit-Pant",
+      slug: "fit-pant",
       category: "Pants",
       image: "/images/pant2.jpg",
       price: 140,
