@@ -1,4 +1,3 @@
-/*
 import NextAuth from 'next-auth';
 import bcryptjs from 'bcryptjs';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -43,10 +42,10 @@ export default NextAuth({
     })
   ]
 })
-*/
 
 
-import NextAuth, { Session, User } from 'next-auth';
+/*
+import NextAuth, { Session } from 'next-auth';
 import bcryptjs from 'bcryptjs';
 import { CredentialsOptions } from 'next-auth/providers';
 import User from '../../../models/users';
@@ -95,3 +94,4 @@ export default NextAuth({
     } as CredentialsOptions)
   ]
 })
+*/
