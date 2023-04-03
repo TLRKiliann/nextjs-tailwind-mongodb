@@ -37,7 +37,12 @@ export default function CartScreen() {
       {
         cartItems.length === 0 ? (
         <div>
-          Cart is empty. <Link href={"/"}>Go Shopping</Link>
+          Cart is empty. 
+          <Link href={"/"} className="rounded-full primary-button 
+            text-blue-800 hover:text-white"
+          >
+            Go Shopping
+          </Link>
         </div>
         ) : (
         <div className="grid md:grid-cols-4 md:gap-5">

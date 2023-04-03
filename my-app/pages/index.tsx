@@ -68,7 +68,7 @@ export default function Home() {
           </div>
         )}
 
-        <div className="mt-4 mr-4 ml-4 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-6 mr-6 ml-6 grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3">
           {data.products.map((product) => (
             <ProductItem key={product.slug} product={product}/>
           ))}
