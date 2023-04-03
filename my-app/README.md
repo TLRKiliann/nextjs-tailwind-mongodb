@@ -32,7 +32,7 @@ Look at :
 
 3. Layout
 
-components/Layout.tsx
+`components/Layout.tsx`
 
 Head set for all pages
 
@@ -48,7 +48,7 @@ footer
 
 components/ProductItem.tsx
 
-Interact with db in utils/data.ts and called by index.tsx
+Interact with db in `utils/data.ts` and called by `index.tsx`
 
 ---
 
@@ -69,8 +69,18 @@ To display product by name & access to it by a new route.
 
 utils/Store
 
-pages/product/[slug].tsx
+`pages/product/[slug].tsx`
 
-components/Layout.tsx
+`components/Layout.tsx`
 
 ---
+
+## Installation DropdownLink for name (after login).
+
+└─ $ ▶ pnpm install @headlessui/react
+
+Files concerns :
+
+`Layout.tsx`
+
+`DropdownLink.tsx`
