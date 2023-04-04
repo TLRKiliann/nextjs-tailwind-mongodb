@@ -6,7 +6,7 @@ import Image from 'next/image'
 import data from '../../utils/data'
 import { Store } from '../../utils/Store'
 
-interface SubProductProduct {
+interface SubProductProps {
   slug: string;
   name: string;
   category: string;
@@ -24,10 +24,9 @@ interface ProductProps {
 }
 
 export default function ProductScreen() {
-  const { state, dispatch } = useContext<React.Reducer<any, Action>>(Store);
-  //const { state, dispatch } = useContext(Store)
-  const router = useRouter() as any
-  const { query } = useRouter() as any
+  const { state, dispatch } = useContext(Store)
+  const router = useRouter()
+  const { query } = useRouter()
   const { slug } = query as {slug: string}
 
   const product: ProductProps = data.products.find(x => x.slug === slug)
@@ -50,18 +49,20 @@ export default function ProductScreen() {
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href={'/'}>Back to products</Link>
+        <Link href={'/'} className="ml-4 rounded-full primary-button 
+          text-blue-800 hover:text-white"
+        >
+          Back to products
+        </Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}
             alt={product.name}
-            width={640}
-            height={640}
-            layout="responsive"
-          >
-          </Image>
+            width={680}
+            height={680}
+          />
         </div>
         <div>
           
