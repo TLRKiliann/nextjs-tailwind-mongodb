@@ -25,7 +25,7 @@ export default function LoginScreen() {
     }
   }, [router,session, redirect])
 
-  const { handleSubmit, register, formState: {errors}, } = useForm<LoginFormInputs>();
+  const { handleSubmit, register, formState: { errors }, } = useForm<LoginFormInputs>();
 
   const submitHandler = async ({ email, password }: LoginFormInputs) => {
     try {
@@ -40,7 +40,6 @@ export default function LoginScreen() {
     } catch(err) {
       toast.error(getError(err));
     }
-    //console.log(email, password);
   } 
   return (
     <Layout title="login">

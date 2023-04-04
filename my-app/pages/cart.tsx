@@ -33,12 +33,12 @@ export default function CartScreen() {
 
   return (
     <Layout title="Shopping Cart">
-      <h1 className="mb-4 text-xl">Shopping Cart</h1>
+      <h1 className="mb-4 ml-4 text-xl">Shopping Cart</h1>
       {
         cartItems.length === 0 ? (
-        <div>
+        <div className="ml-4">
           Cart is empty. 
-          <Link href={"/"} className="rounded-full primary-button 
+          <Link href={"/"} className="rounded-full ml-4 primary-button 
             text-blue-800 hover:text-white"
           >
             Go Shopping
@@ -79,7 +79,10 @@ export default function CartScreen() {
                       {item.quantity}
                     </td>
                     <td className="p-5 text-center">
-                      <select value={item.quantity} onChange={(e) => updateCartHandler(item, e.target.value)}>
+                      <select 
+                        value={item.quantity}
+                        onChange={(e) => updateCartHandler(item, e.target.value)}
+                      >
                       {
                         [...Array(item.countInStock).keys()].map((x: number) => (
                           <option key={x+1} value={x+1}>

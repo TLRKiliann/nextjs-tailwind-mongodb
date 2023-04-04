@@ -25,8 +25,8 @@ interface ProductProps {
 
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store)
-  const router = useRouter() as any
-  const { query } = useRouter() as any
+  const router = useRouter()
+  const { query } = useRouter()
   const { slug } = query as {slug: string}
 
   const product: ProductProps = data.products.find(x => x.slug === slug)
@@ -49,7 +49,7 @@ export default function ProductScreen() {
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href={'/'} className="rounded-full primary-button 
+        <Link href={'/'} className="ml-4 rounded-full primary-button 
           text-blue-800 hover:text-white"
         >
           Back to products
