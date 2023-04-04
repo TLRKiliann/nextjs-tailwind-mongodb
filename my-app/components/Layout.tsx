@@ -1,10 +1,11 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import Cookies from 'js-cookie'
 import { ToastContainer } from 'react-toastify'
 import React, { useState, useEffect, useContext } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
+import SuperHead from './SuperHead'
+import Footer from './Footer'
 import { Menu } from '@headlessui/react'
 import DropdownLink from './DropdownLink'
 import { Store } from '../utils/Store'
@@ -15,12 +16,11 @@ interface Props {
 }
 
 export default function Layout({ title, children }) {
-  
   const { status, data: session } = useSession();
-
   const { state, dispatch } = useContext(Store)
   const { cart } = state
   const [cartItemsCount, setCartItemsCount] = useState<number>(0)
+  
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
   }, [cart.cartItems])
@@ -30,24 +30,20 @@ export default function Layout({ title, children }) {
     dispatch({ type: 'CART_RESET' })
     signOut({ callbackURL: '/login' })
   }
-
   return (
     <>
-
-      <Head>
-        <title>{title ? title + "- corp" : "e-commerce corp"}</title>
-        <meta name="description" content="e-commerce website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    
+      <SuperHead title={title} />
 
       <ToastContainer position="bottom-center" limit={1} />
 
       <div className="flex min-h-screen flex-col justify-between">
         <header>
+
+
           <nav className="mt-6 flex h-12 px-4 justify-between shadow-md item-center">
             <a href="/" className="text-lg text-bold">
-              Corporation
+              Clothing Store
             </a>
             <div>
               <a href="/cart" className="p-2">Cart
@@ -91,14 +87,14 @@ export default function Layout({ title, children }) {
             </div>
           </nav>
         </header>
+
         <main className="w-full m-auto mt-4">
           {children}
         </main>
-        <footer className="flex h-12 justify-center items-center shadow-inner">
-          <p>Copyright © 2023 Corporation</p>
-        </footer>
+        
+        <Footer />
+      
       </div>
-
     </>
   )
 }
