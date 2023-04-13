@@ -1,7 +1,12 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-export default function DropdownLink(props) {
+type DropProps = {
+  href: string;
+  children: ReactNode;
+}
+
+export default function DropdownLink(props: DropProps) {
   let { href, children, ...rest } = props;
   return (
     <Link href={href}>

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, Dispatch } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
-import data from '../../utils/data'
+import { data } from '../../utils/data'
 import { Store } from '../../utils/Store'
+import { StoreContextValue, State, Cart, Item } from '../../type/StoreType'
 
+/*
 interface SubProductProps {
   slug: string;
   name: string;
@@ -18,25 +20,27 @@ interface SubProductProps {
   rating: number;
   numReviews: number;
 }
+*/
 
-interface ProductProps {
-  product: SubProductProps;
+interface Action {
+  type: 'CART_RESET';
+  payload?: Item;
 }
 
 export default function ProductScreen() {
-  const { state, dispatch } = useContext(Store)
+  const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const router = useRouter()
   const { query } = useRouter()
   const { slug } = query as {slug: string}
 
-  const product: ProductProps = data.products.find(x => x.slug === slug)
+  const product = data.products.find(x => x.slug === slug)
 
   if (!product) {
     return <div>Product Not Found</div>
   }
 
   const addToCartHandler = () => {
-    const existItem = state.cart.cartItems.find((x: Product) => x.slug === product.slug)
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product.countInStock < quantity) {
       alert("Sorry no more in stock")
@@ -48,20 +52,20 @@ export default function ProductScreen() {
 
   return (
     <Layout title={product.name}>
-      <div className="py-2">
-        <Link href={'/'} className="ml-4 rounded-full primary-button 
+      <div className="w-1/3 ml-24 py-2">
+        <Link href={'/'} className="flex mr-10 mb-10 ml-10 justify-center rounded-full primary-button 
           text-blue-800 hover:text-white"
         >
           Back to products
         </Link>
       </div>
-      <div className="grid md:grid-cols-4 md:gap-3">
+      <div className="ml-24 grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}
             alt={product.name}
-            width={680}
-            height={680}
+            width="430"
+            height="700"
           />
         </div>
         <div>
@@ -77,7 +81,7 @@ export default function ProductScreen() {
           </ul>
 
         </div>
-        <div>
+        <div className="mr-24">
           <div className="card p-5">
 
             <div className="mb-2 flex justify-between">

@@ -1,33 +1,57 @@
 import React, { useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import Layout from '../components/Layout'
 import CheckoutWizard from '../components/CheckoutWizard'
 import { Store } from '../utils/Store'
 
-export default function ShippingScreen() {
-  const {
-    handleSubmit,
-    register,
-    formState: {errors},
-    setValue,
-  } = useForm();
+type Item = {
+  quantity: number;
+  name: string;
+  slug: string;
+}
 
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
+type Cart = {
+  cartItems: Item[];
+  shippingAddress?: {
+    fullName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+  };
+}
+
+type StateCart = {
+  cart: Cart;
+}
+
+type FormValues = {
+  fullName: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
+export default function ShippingScreen() {
+  const { handleSubmit, register, formState: {errors}, setValue } = useForm<FormValues>()
+
+  const { state, dispatch } = useContext(Store)
+  const { cart }: StateCart = state;
   const { shippingAddress } = cart;
   const router = useRouter()
 
   useEffect(() => {
-    setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
-    setValue('city', shippingAddress.city);
-    setValue('postalCode', shippingAddress.postalCode);
-    setValue('country', shippingAddress.country);
+    setValue('fullName', shippingAddress.fullName)
+    setValue('address', shippingAddress.address)
+    setValue('city', shippingAddress.city)
+    setValue('postalCode', shippingAddress.postalCode)
+    setValue('country', shippingAddress.country)
   }, [setValue, shippingAddress])
 
-  const submitHandler = ({fullName, address, city, postalCode, country}) => {
+  const submitHandler = ({fullName, address, city, postalCode, country}: FormValues) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },
@@ -36,16 +60,10 @@ export default function ShippingScreen() {
       'cart',
       JSON.stringify({
         ...cart,
-        shippingAddress: {
-          fullName,
-          address,
-          city,
-          postalCode,
-          country
-        }
+        shippingAddress: { fullName, address, city, postalCode, country }
       })
     )
-    router.push('/payment');
+    router.push('/payment')
   }
   return (
     <Layout title="Shipping Address">
@@ -80,7 +98,7 @@ export default function ShippingScreen() {
           <input id="address" name="address" className="w-full"
             autoFocus{...register('address', {
               required: 'Please enter address !',
-              minLength: {value: 3, message: 'address is more than 2 chars'}
+              minLength: {value: 3, message: 'address is more than 3 chars'}
             })}
           />
           {errors.address && (
