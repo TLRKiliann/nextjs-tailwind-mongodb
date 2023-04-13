@@ -1,31 +1,7 @@
 import bcrypt from 'bcryptjs';
+import { Data } from '../type/StoreType'
 
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  isAdmin: boolean;
-}
-
-interface Product {
-  name: string;
-  slug: string;
-  category: string;
-  image: string;
-  price: number;
-  brand: string;
-  rating: number;
-  numReviews: number;
-  countInStock: number;
-  description: string;
-}
-
-interface Data {
-  users: User[];
-  products: Product[];
-}
-
-const data: Data = {
+export const data: Data = {
   users: [
     {
       name: 'esteban',
@@ -115,4 +91,3 @@ const data: Data = {
     }
   ]
 }
-export default data;

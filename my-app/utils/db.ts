@@ -1,12 +1,10 @@
 import mongoose, { Connection } from "mongoose";
 
-interface ConnectionProps {
+type ConnectionProps = {
   isConnected: number | boolean;
 }
 
-const connection: ConnectionProps = {
-  isConnected: false,
-};
+const connection: ConnectionProps = { isConnected: false };
 
 async function connect(): Promise<void> {
   if (connection.isConnected) {
