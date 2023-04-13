@@ -1,11 +1,13 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Layout from '../components/Layout'
 
-export default function Unauthorized() {
+interface UnauthorizedProps {}
+
+export default function Unauthorized(props: UnauthorizedProps): JSX.Element {
 
   const router = useRouter()
-  const {message} = router.query
+  const message = router.query
 
   return (
     <Layout title="Unauthorized page">

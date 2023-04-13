@@ -1,33 +1,37 @@
 import React, { useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import Layout from '../components/Layout'
 import CheckoutWizard from '../components/CheckoutWizard'
 import { Store } from '../utils/Store'
+import { StoreContextValue, State } from './../type/StoreType'
+
+type FormValues = {
+  fullName: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
 
 export default function ShippingScreen() {
-  const {
-    handleSubmit,
-    register,
-    formState: {errors},
-    setValue,
-  } = useForm();
+  const { handleSubmit, register, formState: {errors}, setValue } = useForm<FormValues>()
 
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
+  const { cart }: State = state;
   const { shippingAddress } = cart;
   const router = useRouter()
 
   useEffect(() => {
-    setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
-    setValue('city', shippingAddress.city);
-    setValue('postalCode', shippingAddress.postalCode);
-    setValue('country', shippingAddress.country);
+    setValue('fullName', shippingAddress.fullName)
+    setValue('address', shippingAddress.address)
+    setValue('city', shippingAddress.city)
+    setValue('postalCode', shippingAddress.postalCode)
+    setValue('country', shippingAddress.country)
   }, [setValue, shippingAddress])
 
-  const submitHandler = ({fullName, address, city, postalCode, country}) => {
+  const submitHandler = ({fullName, address, city, postalCode, country}: FormValues) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },
@@ -36,16 +40,10 @@ export default function ShippingScreen() {
       'cart',
       JSON.stringify({
         ...cart,
-        shippingAddress: {
-          fullName,
-          address,
-          city,
-          postalCode,
-          country
-        }
+        shippingAddress: { fullName, address, city, postalCode, country }
       })
     )
-    router.push('/payment');
+    router.push('/payment')
   }
   return (
     <Layout title="Shipping Address">
@@ -61,7 +59,7 @@ export default function ShippingScreen() {
           <label htmlFor="fullName">
             Full Name
           </label>
-          <input id="fullName" name="fullName" className="w-full"
+          <input id="fullName" className="w-full"
             autoFocus{...register('fullName', {
               required: 'Please enter full name !'
             })}
@@ -77,10 +75,10 @@ export default function ShippingScreen() {
           <label htmlFor="address">
             Address
           </label>
-          <input id="address" name="address" className="w-full"
+          <input id="address" className="w-full"
             autoFocus{...register('address', {
               required: 'Please enter address !',
-              minLength: {value: 3, message: 'address is more than 2 chars'}
+              minLength: {value: 3, message: 'address is more than 3 chars'}
             })}
           />
           {errors.address && (
@@ -94,7 +92,7 @@ export default function ShippingScreen() {
           <label htmlFor="city">
             City
           </label>
-          <input id="city" name="city" className="w-full"
+          <input id="city" className="w-full"
             autoFocus{...register('city', {
               required: 'Please enter city !',
             })}
@@ -110,7 +108,7 @@ export default function ShippingScreen() {
           <label htmlFor="postalCode">
             Postal Code
           </label>
-          <input id="postalCode" name="postalCode" className="w-full"
+          <input id="postalCode" className="w-full"
             autoFocus{...register('postalCode', {
               required: 'Please enter postal code !',
             })}
@@ -126,7 +124,7 @@ export default function ShippingScreen() {
           <label htmlFor="country">
             Country
           </label>
-          <input id="country" name="country" className="w-full"
+          <input id="country" className="w-full"
             autoFocus{...register('country', {
               required: 'Please enter country !',
             })}

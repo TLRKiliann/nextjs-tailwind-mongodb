@@ -1,24 +1,25 @@
-import Link from 'next/link'
+//import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import Cookies from 'js-cookie'
 import { ToastContainer } from 'react-toastify'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, Dispatch } from 'react'
+import { Menu } from '@headlessui/react'
 import 'react-toastify/dist/ReactToastify.css'
 import SuperHead from './SuperHead'
 import Footer from './Footer'
-import { Menu } from '@headlessui/react'
 import DropdownLink from './DropdownLink'
-import { Store } from '../utils/Store'
+import { State, StoreContextValue, Item } from '../type/StoreType'
+import { Store } from './../utils/Store'
 
-interface Props {
+interface PropsValues {
   title?: string;
   children: React.ReactNode;
 }
 
-export default function Layout({ title, children }) {
+export default function Layout({ title, children }: PropsValues) {
   const { status, data: session } = useSession();
-  const { state, dispatch } = useContext(Store)
-  const { cart } = state
+  const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
+  const { cart }: State = state || { cart: {} }
   const [cartItemsCount, setCartItemsCount] = useState<number>(0)
   
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Layout({ title, children }) {
   const logoutClickHandler = () => {
     Cookies.remove('cart');
     dispatch({ type: 'CART_RESET' })
-    signOut({ callbackURL: '/login' })
+    signOut()
   }
   return (
     <>
@@ -38,8 +39,8 @@ export default function Layout({ title, children }) {
       <ToastContainer position="bottom-center" limit={1} />
 
       <div className="flex min-h-screen flex-col justify-between">
+        
         <header>
-
 
           <nav className="mt-6 flex h-12 px-4 justify-between shadow-md item-center">
             <a href="/" className="text-lg text-bold">
@@ -50,7 +51,7 @@ export default function Layout({ title, children }) {
               {cartItemsCount > 0 && (
                 <span className="ml-1 rounded-full bg-red-600 px-2 py-1 
                   text-xs font-bold text-white">
-                  {cartItemsCount}
+                  { cartItemsCount }
                 </span>
               )}
               </a>
@@ -58,7 +59,7 @@ export default function Layout({ title, children }) {
                 'loading'
                 ) :
                 session?.user ? (
-                  <Menu as="div" className="relative inline-block">
+                  <Menu as="div" className="mr-10 relative inline-block">
                     <Menu.Button className="text-blue-600">
                       { session.user.name }
                     </Menu.Button>
@@ -74,10 +75,10 @@ export default function Layout({ title, children }) {
                         </DropdownLink>
                       </Menu.Item>
                       <Menu.Item>
-                        <a className="dropdown-link" href="/login"
-                          onClick="logoutClickHandler">
+                        <button className="dropdown-link"
+                          onClick={logoutClickHandler}>
                           Logout
-                        </a>
+                        </button>
                       </Menu.Item>
                     </Menu.Items>
                   </Menu>
