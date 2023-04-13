@@ -7,7 +7,6 @@ import Layout from '../components/Layout'
 import { getError } from '../utils/error'
 import { toast } from 'react-toastify'
 
-
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -34,8 +33,8 @@ export default function LoginScreen() {
         email,
         password,
       });
-      if (result.error) {
-        toast.error(result.error);
+      if (result?.error) {
+        toast.error(result?.error);
       }
     } catch(err) {
       toast.error(getError(err));

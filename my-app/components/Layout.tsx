@@ -34,7 +34,7 @@ export default function Layout({ title, children }: PropsValues) {
   return (
     <>
     
-      <SuperHead title ={title} />
+      <SuperHead title={title} />
 
       <ToastContainer position="bottom-center" limit={1} />
 

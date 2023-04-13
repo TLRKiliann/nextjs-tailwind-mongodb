@@ -5,27 +5,7 @@ import Cookies from 'js-cookie'
 import Layout from '../components/Layout'
 import CheckoutWizard from '../components/CheckoutWizard'
 import { Store } from '../utils/Store'
-
-type Item = {
-  quantity: number;
-  name: string;
-  slug: string;
-}
-
-type Cart = {
-  cartItems: Item[];
-  shippingAddress?: {
-    fullName: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    country: string;
-  };
-}
-
-type StateCart = {
-  cart: Cart;
-}
+import { StoreContextValue, State } from './../type/StoreType'
 
 type FormValues = {
   fullName: string;
@@ -38,8 +18,8 @@ type FormValues = {
 export default function ShippingScreen() {
   const { handleSubmit, register, formState: {errors}, setValue } = useForm<FormValues>()
 
-  const { state, dispatch } = useContext(Store)
-  const { cart }: StateCart = state;
+  const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
+  const { cart }: State = state;
   const { shippingAddress } = cart;
   const router = useRouter()
 
@@ -79,7 +59,7 @@ export default function ShippingScreen() {
           <label htmlFor="fullName">
             Full Name
           </label>
-          <input id="fullName" name="fullName" className="w-full"
+          <input id="fullName" className="w-full"
             autoFocus{...register('fullName', {
               required: 'Please enter full name !'
             })}
@@ -95,7 +75,7 @@ export default function ShippingScreen() {
           <label htmlFor="address">
             Address
           </label>
-          <input id="address" name="address" className="w-full"
+          <input id="address" className="w-full"
             autoFocus{...register('address', {
               required: 'Please enter address !',
               minLength: {value: 3, message: 'address is more than 3 chars'}
@@ -112,7 +92,7 @@ export default function ShippingScreen() {
           <label htmlFor="city">
             City
           </label>
-          <input id="city" name="city" className="w-full"
+          <input id="city" className="w-full"
             autoFocus{...register('city', {
               required: 'Please enter city !',
             })}
@@ -128,7 +108,7 @@ export default function ShippingScreen() {
           <label htmlFor="postalCode">
             Postal Code
           </label>
-          <input id="postalCode" name="postalCode" className="w-full"
+          <input id="postalCode" className="w-full"
             autoFocus{...register('postalCode', {
               required: 'Please enter postal code !',
             })}
@@ -144,7 +124,7 @@ export default function ShippingScreen() {
           <label htmlFor="country">
             Country
           </label>
-          <input id="country" name="country" className="w-full"
+          <input id="country" className="w-full"
             autoFocus{...register('country', {
               required: 'Please enter country !',
             })}
