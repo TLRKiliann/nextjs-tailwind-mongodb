@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -6,9 +8,9 @@ import Layout from '../components/Layout'
 import { Store } from '../utils/Store'
 import { StoreContextValue, Item } from '../type/StoreType'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
-//import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 
-export default function CartScreen() {
+const CartScreen = () => {
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const router = useRouter();
   const { 
@@ -118,4 +120,4 @@ export default function CartScreen() {
     </Layout>
   )
 }
-//export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))
+export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))
