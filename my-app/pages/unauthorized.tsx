@@ -10,7 +10,7 @@ export default function Unauthorized(props: UnauthorizedProps): JSX.Element {
   const message = router.query
 
   return (
-    <Layout title="Unauthorized page">
+    <Layout title="Unauthorized page ">
       <h1 className="text-xl">Access Denied</h1>
       {message && <div className="mb-4 text-red-500">
         {message}
