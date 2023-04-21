@@ -1,7 +1,7 @@
 export default function placeorder() {
-	return (
-		<>
-			Place Order
-		</>
-	)
+  return (
+    <>
+      Place Order
+    </>
+  )
 }
