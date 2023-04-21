@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/navigation'
 
 type ProductProps = {
   product: {
@@ -16,11 +15,7 @@ type ProductProps = {
   }
 }
 
-export default function ProductItem({ product }: ProductProps) {
-  const router = useRouter()
-  const handleRoute = () => {
-    router.push(`/product/${product.slug}`)
-  }
+export default function ProductItem({ product, addToCartHandler }: ProductProps) {
   return (
     <div className="card">
       <a href={`/product/${product.slug}`}>
@@ -37,7 +32,7 @@ export default function ProductItem({ product }: ProductProps) {
         </a>
         <p className="mb-2">{product.brand}</p>
         <p>${product.price}</p>
-        <button type="button" onClick={handleRoute} className="primary-button">
+        <button type="button" onClick={() => addToCartHandler(product)} className="primary-button">
           Add to cart
         </button>
       </div>
