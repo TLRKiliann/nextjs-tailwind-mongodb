@@ -1,10 +1,13 @@
 import { GetServerSideProps } from 'next'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 import { useTheme } from "next-themes"
 import Layout from "../components/Layout"
 import ProductItem from '@/components/ProductItem'
 import Product from '../models/Product'
 import db from '../utils/db'
+import { Store } from '../utils/Store'
 import { BsMoon } from 'react-icons/bs'
 import { BsSun } from 'react-icons/bs'
 
@@ -22,6 +25,22 @@ type ProductProps = {
 }[]
 
 export default function Home({ products }) {
+
+  const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
+  const { cart }: State = state || { cart: {} }
+
+  const addToCartHandler = async (product) => {
+    const existItem = cart.cartItems.find((x) => x.slug === product.slug)
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`)
+
+    if (data.countInStock < quantity) {
+      return toast.error("Sorry no more in stock")
+    }
+
+    dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
+    toast.success("Product added to cart !")
+  }
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
@@ -70,7 +89,7 @@ export default function Home({ products }) {
 
         <div className="mt-14 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
           {products.map((product: ProductProps) => (
-            <ProductItem key={product.slug} product={product}/>
+            <ProductItem key={product.slug} product={product} addToCartHandler={addToCartHandler} />
           ))}
         </div>
 

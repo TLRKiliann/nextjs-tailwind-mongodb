@@ -3,12 +3,14 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useContext, Dispatch } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import Layout from '../../components/Layout'
 import { data } from '../../utils/data'
 import { Store } from '../../utils/Store'
 import { StoreContextValue, State, Cart, Item } from '../../type/StoreType'
-import db from '../utils/db'
-import Product from '../models/Product'
+import db from '../../utils/db'
+import Product from '../../models/Product'
 
 type SubProductProps = {
   slug: string;
@@ -42,9 +44,8 @@ export default function ProductScreen(props: SubProductProps) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`)
 
-    if (product.countInStock < quantity) {
-      alert("Sorry no more in stock")
-      return;
+    if (data.countInStock < quantity) {
+      return toast.error("Sorry no more in stock")
     }
 
     dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
