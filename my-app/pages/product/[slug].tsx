@@ -1,14 +1,18 @@
-import React, { useContext, Dispatch } from 'react'
-import Layout from '../../components/Layout'
-import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import React, { useContext, Dispatch } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Layout from '../../components/Layout'
 import { data } from '../../utils/data'
 import { Store } from '../../utils/Store'
 import { StoreContextValue, State, Cart, Item } from '../../type/StoreType'
+import db from '../../utils/db'
+import Product from '../../models/Product'
 
-/*
-interface SubProductProps {
+type SubProductProps = {
   slug: string;
   name: string;
   category: string;
@@ -20,32 +24,30 @@ interface SubProductProps {
   rating: number;
   numReviews: number;
 }
-*/
 
-interface Action {
+type Action = {
   type: 'CART_RESET';
   payload?: Item;
 }
 
-export default function ProductScreen() {
+export default function ProductScreen(props: SubProductProps) {
+  const { product } = props;
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const router = useRouter()
-  const { query } = useRouter()
-  const { slug } = query as {slug: string}
-
-  const product = data.products.find(x => x.slug === slug)
 
   if (!product) {
-    return <div>Product Not Found</div>
+    return <Layout title="Product Not Found">Product Not Found</Layout>
   }
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    if (product.countInStock < quantity) {
-      alert("Sorry no more in stock")
-      return;
+    const { data } = await axios.get(`/api/products/${product._id}`)
+
+    if (data.countInStock < quantity) {
+      return toast.error("Sorry no more in stock")
     }
+
     dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
     router.push('/cart')
   }
@@ -107,4 +109,19 @@ export default function ProductScreen() {
       </div>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context
+  const { slug } = params
+
+  await db.connect()
+  const product = await Product.findOne({ slug }).lean()
+  await db.disconnect()
+
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    }
+  }
 }

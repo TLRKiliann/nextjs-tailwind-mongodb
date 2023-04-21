@@ -4,8 +4,11 @@ import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import Layout from '../components/Layout'
 import { Store } from '../utils/Store'
+import { data } from '../../utils/data'
 import { StoreContextValue, Item } from '../type/StoreType'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import dynamic from 'next/dynamic'
@@ -20,9 +23,14 @@ const CartScreen = () => {
   const removeItemHandler = (item: Item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   }
-  const updateCartHandler = (item: Item, qty: string) => {
+  const updateCartHandler = async (item: Item, qty: string) => {
     const quantity = Number(qty);
+    const { data } = await axios.get(`/api/products/${item._id}`)
+    if (data.countInStock < quantity) {
+      return toast.error("Sorry. Product is out of stock !")
+    }
     dispatch({type:'CART_ADD_ITEM', payload:{...item, quantity}})
+    toast.success("Product updated to cart !")
   }
 
   return (
