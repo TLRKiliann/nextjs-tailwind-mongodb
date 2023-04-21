@@ -1,12 +1,14 @@
+import { GetServerSideProps } from 'next'
 import { useState, useEffect } from 'react'
 import { useTheme } from "next-themes"
 import Layout from "../components/Layout"
 import ProductItem from '@/components/ProductItem'
-import { data } from "../utils/data"
+import Product from '../models/Product'
+import db from '../utils/db'
 import { BsMoon } from 'react-icons/bs'
 import { BsSun } from 'react-icons/bs'
 
-type Product = {
+type ProductProps = {
   name: string;
   slug: string;
   category: string;
@@ -17,9 +19,9 @@ type Product = {
   numReviews: number;
   countInStock: number;
   description: string;
-};
+}[]
 
-export default function Home() {
+export default function Home({ products }) {
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
@@ -67,7 +69,7 @@ export default function Home() {
         )}
 
         <div className="mt-14 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
-          {data.products.map((product: Product) => (
+          {products.map((product: ProductProps) => (
             <ProductItem key={product.slug} product={product}/>
           ))}
         </div>
@@ -75,4 +77,14 @@ export default function Home() {
       </main>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  await db.connect()
+  const products = await Product.find().lean()
+  return {
+    props: {
+      products: products.map(db.convertDocToObj),
+    }
+  }
 }
