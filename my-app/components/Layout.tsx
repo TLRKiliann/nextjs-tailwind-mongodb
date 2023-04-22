@@ -10,7 +10,7 @@ import ThemeColor from './ThemeColor'
 import SuperHead from './SuperHead'
 import Footer from './Footer'
 import DropdownLink from './DropdownLink'
-import { Store } from './../utils/Store'
+import { Store } from '@/utils/Store'
 
 interface PropsValues {
   title?: string;
@@ -35,7 +35,6 @@ export default function Layout({ title, children }: PropsValues) {
   }
   return (
     <>
-    
       <SuperHead title={title} />
 
       <ToastContainer position="bottom-center" limit={1} />
@@ -48,23 +47,23 @@ export default function Layout({ title, children }: PropsValues) {
             <a href="/" className="text-lg text-bold">
               Clothing Store
             </a>
-            <div>
-              <button onClick={() => router.push('/cart')} className="mr-20 text-md">
+            <div className="flex">
+              <button onClick={() => router.push('/cart')} className="mr-10 flex text-md">
                 Cart
               {cartItemsCount > 0 && (
-                <span className="absolute ml-1 mt-2 rounded-full bg-red-600 px-1 py-1 
+                <span className="mt-3 ml-7 absolute px-2 rounded-full bg-red-600 px-1 py-1 
                   text-xs font-bold text-white">
                   { cartItemsCount }
                 </span>
               )}
               </button>
               {status === 'loading' ? (
-                <p className="mr-12 p-2 flex items-center">
+                <p className="mr-12 p-2 items-center">
                   loading
                 </p>
-                ) :
+                ) : 
                 session?.user ? (
-                  <Menu as="div" className="mr-10 relative inline-block">
+                  <Menu as="div" className="mr-20 text-md">
                     <Menu.Button className="text-blue-600">
                       { session.user.name }
                     </Menu.Button>
@@ -80,7 +79,7 @@ export default function Layout({ title, children }: PropsValues) {
                         </DropdownLink>
                       </Menu.Item>
                       <Menu.Item>
-                        <button className="dropdown-link"
+                        <button className="w-full dropdown-link"
                           onClick={logoutClickHandler}>
                           Logout
                         </button>

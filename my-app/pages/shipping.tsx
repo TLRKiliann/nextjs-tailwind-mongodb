@@ -31,7 +31,7 @@ export default function ShippingScreen() {
     setValue('country', shippingAddress.country)
   }, [setValue, shippingAddress])
 
-  const submitHandler = ({fullName, address, city, postalCode, country}: FormValues) => {
+  const submitHandler = ({ fullName, address, city, postalCode, country }: FormValues) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },
@@ -137,7 +137,7 @@ export default function ShippingScreen() {
         </div>
 
         <div className="mb-4 flex justify-between">
-          <button className="primary-button">Next</button>
+          <button className="secondary-button mt-2">Next</button>
         </div>
 
       </form>

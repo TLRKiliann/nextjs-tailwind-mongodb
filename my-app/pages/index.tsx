@@ -3,7 +3,7 @@ import { State, StoreContextValue } from '@/type/StoreType'
 import { useState, useEffect, useContext } from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import Layout from "@/components/Layout"
+import Layout from '@/components/Layout'
 import ProductItem from '@/components/ProductItem'
 import Product from '@/models/Product'
 import db from '@/utils/db'
