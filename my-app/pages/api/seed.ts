@@ -15,7 +15,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   await Product.deleteMany();
   await Product.insertMany(data.products);
   await db.disconnect();
-  //res.json({ message: "seeded successfully" });
   res.send({ message: "seeded successfully" });
 }
 
