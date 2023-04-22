@@ -1,6 +1,7 @@
 import { Dispatch } from 'react'
 
 export type Item = {
+  countInStock(countInStock: any): unknown;
   quantity: number;
   name: string;
   slug: string;
@@ -17,7 +18,7 @@ export type Cart = {
     postalCode: string;
     country: string;
     location: object;
-  };
+  }
   paymentMethod: string;
 }
 

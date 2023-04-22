@@ -1,35 +1,49 @@
 import { GetServerSideProps } from 'next'
+import { State, StoreContextValue } from '@/type/StoreType'
 import { useState, useEffect, useContext } from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { useTheme } from "next-themes"
-import Layout from "../components/Layout"
+import Layout from "@/components/Layout"
 import ProductItem from '@/components/ProductItem'
-import Product from '../models/Product'
-import db from '../utils/db'
-import { Store } from '../utils/Store'
-import { BsMoon } from 'react-icons/bs'
-import { BsSun } from 'react-icons/bs'
+import Product from '@/models/Product'
+import db from '@/utils/db'
+import { Store } from '@/utils/Store'
 
 type ProductProps = {
-  name: string;
-  slug: string;
-  category: string;
-  image: string;
-  price: number;
-  brand: string;
-  rating: number;
-  numReviews: number;
-  countInStock: number;
-  description: string;
-}[]
+    _id: number;
+    name: string;
+    slug: string;
+    category: string;
+    image: string;
+    price: number;
+    brand: string;
+    rating: number;
+    numReviews: number;
+    countInStock: number;
+    description: string;
+}
 
-export default function Home({ products }) {
+type ProductsProps = {
+  products:{
+    name: string;
+    slug: string;
+    category: string;
+    image: string;
+    price: number;
+    brand: string;
+    rating: number;
+    numReviews: number;
+    countInStock: number;
+    description: string;
+  }[]
+}
+
+export default function Home({ products }: ProductsProps) {
 
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state || { cart: {} }
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = async (product: ProductProps) => {
     const existItem = cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`)
@@ -42,53 +56,18 @@ export default function Home({ products }) {
     toast.success("Product added to cart !")
   }
 
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const switchTheme = () => {
-    if (isMounted) {
-      setTheme(theme === "light" ? "dark" : "light");
-    }
-  };
-
   return (
     <Layout title="Home page ">
       <main>
 
-        <h2 className="mt-4 ml-4 text-3xl font-bold text-slate-500">E-commerce Next.js</h2>
+        <h1 className="ml-4 text-3xl font-bold">
+          Dark mode with Tailwind and Next-themes
+        </h1>
 
-        {theme === "light" ? (
-          <div>
-            <h1 className="ml-4 font-logoText font-bold text-slate-700">
-              Dark mode with Tailwind and Next-themes
-            </h1>
-            <button onClick={switchTheme} className="absolute p-2
-              mt-4 mr-3 top-0 right-0 text-xs text-black bg-slate-50
-              border-solid rounded-lg">
-              <BsMoon size={18} />
-            </button>
-          </div>
-          
-          ) : (
+        <h2 className="mt-1 ml-4 text-2xl font-bold">E-commerce Next.js</h2>
 
-          <div>
-            <h1 className="ml-4 font-logoText font-bold text-slate-400">
-              Dark mode with Tailwind and Next-themes
-            </h1>
-            <button onClick={switchTheme} className="absolute p-2
-              mt-4 mr-3 top-0 right-0 text-xs text-slate-50 bg-black
-              border-solid rounded-lg">
-              <BsSun size={24} />
-            </button>
-          </div>
-        )}
-
-        <div className="mt-14 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
-          {products.map((product: ProductProps) => (
+        <div className="mt-10 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
+          {products.map((product) => (
             <ProductItem key={product.slug} product={product} addToCartHandler={addToCartHandler} />
           ))}
         </div>

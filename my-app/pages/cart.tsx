@@ -1,24 +1,21 @@
 'use client'
 
+import { StoreContextValue, Item } from '@/type/StoreType'
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Layout from '../components/Layout'
-import { Store } from '../utils/Store'
-import { data } from '../../utils/data'
-import { StoreContextValue, Item } from '../type/StoreType'
-import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import dynamic from 'next/dynamic'
+import Layout from '@/components/Layout'
+import { Store } from '@/utils/Store'
+import { AiOutlineExclamationCircle } from 'react-icons/ai'
 
 const CartScreen = () => {
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const router = useRouter();
-  const { 
-    cart: { cartItems },
-  } = state;
+  const { cart: { cartItems },} = state;
 
   const removeItemHandler = (item: Item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
@@ -128,4 +125,4 @@ const CartScreen = () => {
     </Layout>
   )
 }
-export default dynamic(() => Promise.resolve(CartScreen, {ssr:false}))
+export default dynamic(() => Promise.resolve(CartScreen, {ssr: false}))
