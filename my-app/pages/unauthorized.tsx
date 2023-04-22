@@ -11,7 +11,14 @@ export default function Unauthorized(props: UnauthorizedProps): JSX.Element {
 
   return (
     <Layout title="Unauthorized page ">
-      <h1 className="text-xl">Access Denied</h1>
+      <h1 className="m-2 text-xl">Access Denied ! </h1>
+      <button
+        onClick={() => router.push('/login')}
+        className="w-40 ml-2 py-1 text-lg text-center 
+        text-slate-50 bg-blue-600 border rounded-lg"
+      >
+        Go to login
+      </button>
       {message && <div className="mb-4 text-red-500">
         {message}
       </div>}
