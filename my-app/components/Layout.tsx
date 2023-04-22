@@ -1,6 +1,6 @@
-//import Link from 'next/link'
-import { State, StoreContextValue } from '@/type/StoreType'
+import { State, Item, StoreContextValue } from '@/type/StoreType'
 import React, { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import { useTheme } from "next-themes"
 import Cookies from 'js-cookie'
@@ -20,17 +20,20 @@ interface PropsValues {
 }
 
 export default function Layout({ title, children }: PropsValues) {
+  const router = useRouter()
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state || { cart: {} }
+
   const [cartItemsCount, setCartItemsCount] = useState<number>(0)
-  
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
+  console.log("cartItemsCount : ", cartItemsCount)
 
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
   }, [cart.cartItems])
+
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setIsMounted(true);
@@ -63,14 +66,14 @@ export default function Layout({ title, children }: PropsValues) {
               Clothing Store
             </a>
             <div className="flex items-center">
-              <a href="/cart" className="mr-4 p-2">Cart
+              <button onClick={() => router.push('/cart')} className="mr-4 p-2">Cart
               {cartItemsCount > 0 && (
                 <span className="ml-1 rounded-full bg-red-600 px-2 py-1 
                   text-xs font-bold text-white">
                   { cartItemsCount }
                 </span>
               )}
-              </a>
+              </button>
               {status === 'loading' ? (
                 <p className="mr-12 p-2 flex items-center">loading</p>
                 ) :
@@ -104,9 +107,9 @@ export default function Layout({ title, children }: PropsValues) {
 
               {theme === "light" && isMounted === true ? (
                 <div>
-                  <button onClick={switchTheme} className="absolute p-3
-                    mt-6 mr-3 top-0 right-0 text-xs text-black bg-slate-100
-                    border-solid rounded-lg">
+                  <button onClick={switchTheme} className="absolute p-2
+                    mt-7 mr-3 top-0 right-0 text-slate-600 bg-slate-100
+                    rounded-full drop-shadow-md">
                     <BsMoon size={18} />
                   </button>
                 </div>
@@ -114,9 +117,9 @@ export default function Layout({ title, children }: PropsValues) {
                 ) : (
 
                 <div>
-                  <button onClick={switchTheme} className="absolute p-3
-                    mt-6 mr-3 top-0 text-yellow-200 right-0 bg-slate-700
-                    border-solid rounded-lg">
+                  <button onClick={switchTheme} className="absolute p-2
+                    mt-7 mr-3 top-0 right-0 text-yellow-200 bg-slate-600
+                    brightness-95 rounded-full drop-shadow-md">
                     <BsSun size={24} />
                   </button>
                 </div>
