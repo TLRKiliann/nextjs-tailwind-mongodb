@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 
 type DropProps = {
   href: string;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function DropdownLink(props: DropProps) {

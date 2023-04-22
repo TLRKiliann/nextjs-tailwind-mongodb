@@ -1,14 +1,14 @@
 //import Link from 'next/link'
+import { State, StoreContextValue } from '@/type/StoreType'
+import React, { useState, useEffect, useContext } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import Cookies from 'js-cookie'
 import { ToastContainer } from 'react-toastify'
-import React, { useState, useEffect, useContext, Dispatch } from 'react'
 import { Menu } from '@headlessui/react'
 import 'react-toastify/dist/ReactToastify.css'
 import SuperHead from './SuperHead'
 import Footer from './Footer'
 import DropdownLink from './DropdownLink'
-import { State, StoreContextValue, Item } from '../type/StoreType'
 import { Store } from './../utils/Store'
 
 interface PropsValues {

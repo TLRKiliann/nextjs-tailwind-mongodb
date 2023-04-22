@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-import Layout from '../components/Layout'
-import CheckoutWizard from '../components/CheckoutWizard'
-import { Store } from '../utils/Store'
+import Layout from '@/components/Layout'
+import CheckoutWizard from '@/components/CheckoutWizard'
+import { Store } from '@/utils/Store'
 import { StoreContextValue, State } from './../type/StoreType'
 
 type FormValues = {

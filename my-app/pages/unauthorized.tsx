@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import Layout from '../components/Layout'
+import Layout from '@/components/Layout'
 
 interface UnauthorizedProps {}
 

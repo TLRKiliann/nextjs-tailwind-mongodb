@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
-import CheckoutWizard from '../components/CheckoutWizard'
-import Layout from '../components/Layout'
-import { State } from '../type/StoreType'
-import { Store } from '../utils/Store'
+import CheckoutWizard from '@/components/CheckoutWizard'
+import Layout from '@/components/Layout'
+import { State } from '@/type/StoreType'
+import { Store } from '@/utils/Store'
 
 export default function PaymentScreen() {
   /*const {state, dispatch} = useContext(Store)

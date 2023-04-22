@@ -1,14 +1,13 @@
 import { GetServerSideProps } from 'next'
+import { StoreContextValue, Item } from '../../type/StoreType'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useContext, Dispatch } from 'react'
+import { useContext } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Layout from '../../components/Layout'
-import { data } from '../../utils/data'
 import { Store } from '../../utils/Store'
-import { StoreContextValue, State, Cart, Item } from '../../type/StoreType'
 import db from '../../utils/db'
 import Product from '../../models/Product'
 
@@ -25,10 +24,10 @@ type ProductProps = {
   numReviews: number;
 }
 
-/*type Action = {
+type Action = {
   type: 'CART_RESET';
   payload?: Item;
-}*/
+}
 
 export default function ProductScreen(props: ProductProps) {
   const { product } = props;
@@ -111,7 +110,7 @@ export default function ProductScreen(props: ProductProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { params } = context
   const { slug } = params
 
