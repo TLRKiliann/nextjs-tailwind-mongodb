@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from "next-themes"
 import { BsMoon } from 'react-icons/bs'
 import { BsSun } from 'react-icons/bs'
@@ -33,7 +33,7 @@ export default function ThemeColor() {
 
         <div>
           <button onClick={switchTheme} className="absolute p-3
-            top-4 mr-3 top-0 right-0 text-yellow-500 bg-slate-700
+            top-4 mr-3 top-0 right-0 text-yellow-300 bg-slate-700
             brightness-95 rounded-full drop-shadow-md">
             <BsSun size={24} />
           </button>

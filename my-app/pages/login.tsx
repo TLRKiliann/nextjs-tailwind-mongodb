@@ -3,9 +3,9 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import Layout from '@/components/Layout'
 import { getError } from '@/utils/error'
-import { toast } from 'react-toastify'
 
 type LoginFormInputs = {
   email: string;
@@ -75,8 +75,9 @@ export default function LoginScreen() {
                 message: "password is more than 5 chars"
               },
             })}
-            className="w-full" id="password" autoFocus/>
-
+            className="w-full" id="password" autoFocus
+          />
+          
             {errors.password && (
               <div className="text-red-500">
                 {errors.password.message}

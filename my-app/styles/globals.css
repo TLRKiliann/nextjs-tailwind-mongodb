@@ -9,11 +9,11 @@
 }
 
 .primary-button {
-  @apply rounded bg-amber-400 py-2 px-4 shadow outline-none hover:bg-amber-500 active:bg-amber-600;
+  @apply rounded bg-amber-500 px-8 py-2 shadow outline-none hover:bg-amber-400 active:bg-amber-600;
 }
 
 .secondary-button {
-  @apply rounded bg-blue-500 py-2 text-slate-100 px-4 shadow outline-none hover:bg-blue-600 active:bg-amber-500;
+  @apply rounded bg-blue-500 px-8 py-2 text-slate-100 shadow outline-none hover:bg-blue-600 active:bg-amber-500;
 }
 
 input,

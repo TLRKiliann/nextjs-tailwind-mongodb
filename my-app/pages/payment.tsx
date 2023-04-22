@@ -21,7 +21,7 @@ export default function PaymentScreen() {
       return toast.error('Payment Method Required')
     }
     dispatch({type: 'SAVE_PAYMENT_METHOD', payload: selectedPaymentMethod})
-    Cookie.set(
+    Cookies.set(
       'cart',
       JSON.stringify({
         ...cart,
@@ -63,13 +63,16 @@ export default function PaymentScreen() {
           ))
         }
         <div className="mt-6 mb-4 flex justify-between">
-          <button type="button" onClick={() => router.push('/shipping')}
-            className="px-10 py-2 text-slate-50 bg-sky-600 border rounded-xl hover:bg-sky-700"
+          <button
+            type="button" 
+            onClick={() => router.push('/shipping')}
+            className="secondary-button"
           >
             Back
           </button>
-          <button type="button" onClick={() => router.push('/placeorder')}
-            className="px-10 py-2 text-slate-50 bg-sky-600 border rounded-xl hover:bg-sky-700"
+          <button 
+            type="submit"
+            className="secondary-button"
           >
             Next
           </button>
@@ -78,3 +81,6 @@ export default function PaymentScreen() {
     </Layout>
   )
 }
+
+PaymentScreen.auth = true;
+//onClick={() => router.push('/placeorder')}

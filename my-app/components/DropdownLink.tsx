@@ -9,8 +9,8 @@ type DropProps = {
 export default function DropdownLink(props: DropProps) {
   let { href, children, ...rest } = props;
   return (
-    <Link href={href}>
-      <p {...rest}>{children}</p>
+    <Link href={href} {...rest}>
+      {children}
     </Link>
   )
 }

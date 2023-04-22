@@ -61,16 +61,16 @@ const CartScreen = () => {
                   <tr key={item.slug} className="border">
                     <td>
                       <Link href={`/product/${item.slug}`}>
-                        <div className="flex items-center">
+                        <div className="flex-col items-center">
                           <Image
                             src={item.image}
                             alt={item.name}
-                            width="50"
-                            height="75"
-                          >
-                          </Image>
+                            width={70}
+                            height={70}
+                            className="mb-0 ml-3"
+                          />
                           &nbsp;
-                          {item.name}
+                          <p className="ml-2 text-xs">{item.name}</p>
                         </div>
                       </Link>
                     </td>
