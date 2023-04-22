@@ -7,29 +7,46 @@ import Layout from "../components/Layout"
 import ProductItem from '@/components/ProductItem'
 import Product from '../models/Product'
 import db from '../utils/db'
+import { State, StoreContextValue } from '../type/StoreType'
 import { Store } from '../utils/Store'
 import { BsMoon } from 'react-icons/bs'
 import { BsSun } from 'react-icons/bs'
 
 type ProductProps = {
-  name: string;
-  slug: string;
-  category: string;
-  image: string;
-  price: number;
-  brand: string;
-  rating: number;
-  numReviews: number;
-  countInStock: number;
-  description: string;
-}[]
+    _id: number;
+    name: string;
+    slug: string;
+    category: string;
+    image: string;
+    price: number;
+    brand: string;
+    rating: number;
+    numReviews: number;
+    countInStock: number;
+    description: string;
+}
 
-export default function Home({ products }) {
+type ProductsProps = {
+  products:{
+    name: string;
+    slug: string;
+    category: string;
+    image: string;
+    price: number;
+    brand: string;
+    rating: number;
+    numReviews: number;
+    countInStock: number;
+    description: string;
+  }[]
+}
+
+export default function Home({ products }: ProductsProps) {
 
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state || { cart: {} }
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = async (product: ProductProps) => {
     const existItem = cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`)
@@ -88,7 +105,7 @@ export default function Home({ products }) {
         )}
 
         <div className="mt-14 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
-          {products.map((product: ProductProps) => (
+          {products.map((product) => (
             <ProductItem key={product.slug} product={product} addToCartHandler={addToCartHandler} />
           ))}
         </div>

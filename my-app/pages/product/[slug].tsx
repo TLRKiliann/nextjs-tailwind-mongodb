@@ -12,7 +12,7 @@ import { StoreContextValue, State, Cart, Item } from '../../type/StoreType'
 import db from '../../utils/db'
 import Product from '../../models/Product'
 
-type SubProductProps = {
+type ProductProps = {
   slug: string;
   name: string;
   category: string;
@@ -25,12 +25,12 @@ type SubProductProps = {
   numReviews: number;
 }
 
-type Action = {
+/*type Action = {
   type: 'CART_RESET';
   payload?: Item;
-}
+}*/
 
-export default function ProductScreen(props: SubProductProps) {
+export default function ProductScreen(props: ProductProps) {
   const { product } = props;
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const router = useRouter()
