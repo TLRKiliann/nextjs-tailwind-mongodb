@@ -1,4 +1,4 @@
-//import React from 'react'
+import React from 'react'
 
 type ProductProps = {
   product: {
@@ -15,21 +15,7 @@ type ProductProps = {
   }
 }
 
-export default function ProductItem({ product }: ProductProps) {
-  function addToCartHandler(product: { 
-    name: string;
-    slug: string;
-    category: string;
-    image: string;
-    price: number;
-    brand: string;
-    rating: number;
-    numReviews: number;
-    countInStock: number;
-    description: string }): void {
-      throw new Error("Function not implemented.")
-  }
-
+export default function ProductItem({ product, addToCartHandler }: ProductProps) {
   return (
     <div className="card">
       <a href={`/product/${product.slug}`}>

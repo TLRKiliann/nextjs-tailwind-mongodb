@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 
-interface UnauthorizedProps {}
+type UnauthorizedProps = {}
 
 export default function Unauthorized(props: UnauthorizedProps): JSX.Element {
 

@@ -8,8 +8,6 @@ import { State } from '@/type/StoreType'
 import { Store } from '@/utils/Store'
 
 export default function PaymentScreen() {
-  /*const {state, dispatch} = useContext(Store)
-  const {cart} = state*/
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state || { cart: {} }
 
