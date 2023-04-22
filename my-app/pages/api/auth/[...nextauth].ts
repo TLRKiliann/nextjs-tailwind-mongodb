@@ -5,21 +5,6 @@ import User from '../../../models/users';
 import db from '../../../utils/db';
 
 export default NextAuth({
-  session: {
-    strategy: 'jwt',
-  },
-  callback: {
-    async jwt({ token, user }) {
-      if (user?._id) token._id = user._id;
-      if (user?.isAdmin) token.isAdmin = user.isAdmin;
-      return token; 
-    },
-    async session({ session, token }) {
-      if (token?._id) session.user._id = token._id;
-      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
-      return session;
-    }
-  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -40,5 +25,27 @@ export default NextAuth({
         throw new Error('Invalid email or password');
       }
     })
-  ]
+  ],
+  session: {
+    jwt: true
+  },
+  jwt: {
+    secret: 'axzutbypak'
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user?._id) {
+        token._id = user._id
+      }
+      if (user?.isAdmin) {
+        token.isAdmin = user.isAdmin
+      }
+      return token; 
+    },
+    async session({ session, token, user }) {
+      if (token?._id) session.user._id = token._id;
+      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
+      return session;
+    }
+  },
 })
