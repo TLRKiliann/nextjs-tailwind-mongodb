@@ -46,7 +46,7 @@ export default function LoginScreen() {
         className="mt-20 mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-xl">Login</h1>
+        <h1 className="mb-4 text-2xl text-slate-500">Login</h1>
         
         <div className="mb-4">
           <label htmlFor="email">Email</label>
@@ -86,12 +86,24 @@ export default function LoginScreen() {
         </div>
 
         <div className="mb-4">
-          <button type="submit" className="primary-button">Login</button>
+          <button
+            type="submit"
+            className="secondary-button"
+          >
+            Login
+          </button>
         </div>
         
-        <div className="mb-4">
-          <p>Don't have an account ?</p>
-          <Link href="register">Register</Link>
+        <div className="flex items-center justify-start">
+          <p className="text-orange-400">
+            Don't have an account ?
+          </p>
+          <Link 
+            href="register"
+            className="px-4 text-lg text-red-400 hover:text-green-400"
+          >
+            Register
+          </Link>
         </div>
 
       </form>

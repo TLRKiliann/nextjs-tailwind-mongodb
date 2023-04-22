@@ -49,8 +49,7 @@ export default function ProductScreen(props: ProductProps) {
   return (
     <Layout title={product.name}>
       <div className="w-1/3 ml-24 py-2">
-        <Link href={'/'} className="flex mr-10 mb-10 ml-10 justify-center rounded-full primary-button 
-          text-blue-800 hover:text-white"
+        <Link href={'/'} className="text-orange-400"
         >
           Back to products
         </Link>

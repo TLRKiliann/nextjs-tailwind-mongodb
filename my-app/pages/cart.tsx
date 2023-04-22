@@ -32,10 +32,10 @@ const CartScreen = () => {
 
   return (
     <Layout title="Shopping Cart">
-      <h1 className="mb-4 ml-4 text-xl">Shopping Cart</h1>
+      <h1 className="m-4 text-xl">Shopping Cart</h1>
       {
         cartItems.length === 0 ? (
-        <div className="ml-4">
+        <div className="m-4">
           Cart is empty. 
           <Link href={"/"} className="rounded-full ml-4 primary-button 
             text-blue-800 hover:text-white"
@@ -44,7 +44,7 @@ const CartScreen = () => {
           </Link>
         </div>
         ) : (
-        <div className="grid md:grid-cols-4 md:gap-5">
+        <div className="m-4 grid md:grid-cols-4 md:gap-5">
           <div className="overflow-x-auto md:col-span-3">
             <table className="min-w-full">
               <thead className="border">
