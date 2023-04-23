@@ -58,7 +58,7 @@ export default function Layout({ title, children }: PropsValues) {
               )}
               </button>
               {status === 'loading' ? (
-                <p className="mr-12 p-2 items-center">
+                <p className="mr-16">
                   loading
                 </p>
                 ) : 
