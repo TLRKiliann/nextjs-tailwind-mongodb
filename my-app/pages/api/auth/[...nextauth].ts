@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth';
 import bcryptjs from 'bcryptjs';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import User from '../../../models/users';
-import db from '../../../utils/db';
+import User from '@/models/users';
+import db from '@/utils/db';
 
 export default NextAuth({
   providers: [
@@ -10,7 +10,7 @@ export default NextAuth({
       async authorize(credentials) {
         await db.connect();
         const user = await User.findOne({
-          email: credentials.email,
+          email: credentials?.email,
         })
         await db.disconnect();
         if (user && bcryptjs.compareSync(credentials.password, user.password)) {
@@ -35,10 +35,10 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?._id) {
-        token._id = user._id
+        token._id = user?._id
       }
       if (user?.isAdmin) {
-        token.isAdmin = user.isAdmin
+        token.isAdmin = user?.isAdmin
       }
       return token; 
     },

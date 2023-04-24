@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import User from "../../models/users";
-import Product from "../../models/Product";
-import { data } from "../../utils/data";
-import db from "../../utils/db";
+import User from "@/models/users";
+import Product from "@/models/Product";
+import { data } from "@/utils/data";
+import db from "@/utils/db";
 
 type Data = {
   message: string;

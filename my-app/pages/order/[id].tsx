@@ -1,8 +1,23 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
-import Layout from '@/../components/Layout'
+import Image from 'next/image'
+import axios from 'axios'
+import Layout from '@/components/Layout'
+import Order from '@/models/Order'
+import { getError } from '@/utils/error'
 
-function reducer(state, action) {
+type State = {
+  loading: boolean;
+  order: typeof Order | {};
+  error: string;
+};
+
+type Action = {
+  type: 'FETCH_REQUEST' | 'FETCH_SUCCESS' | 'FETCH_FAIL'
+  payload?: typeof Order | string;
+}
+
+function reducer(state: State, action: Action) {
   switch(action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -19,21 +34,18 @@ function OrderScreen() {
   const { query } = useRouter();
   const orderId = query.id;
 
-  const = [
-    { loading, error, order },
-    dispatch,
-  ] = useReducer(reducer, {
+  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
     loading: true,
     order: {},
     error: '',
-  })
+  });
 
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-      dispatch({ type: 'FETCH_REQUEST' });
-      const { data } = await axios.get(`/api/orders/${orderId}`);
-      dispatch({ type: 'FETCH_SUCCESS', payload: data })
+        dispatch({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get(`/api/orders/${orderId}`);
+        dispatch({ type: 'FETCH_SUCCESS', payload: data })
       } catch(err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
       }
@@ -165,7 +177,7 @@ function OrderScreen() {
         </div>
 
       </div>
-      ))}
+      )}
     </Layout>
   )
 }

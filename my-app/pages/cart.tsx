@@ -1,7 +1,7 @@
 'use client'
 
 import { StoreContextValue, Item } from '@/type/StoreType'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'

@@ -1,9 +1,9 @@
-import React, { createContext, useReducer, ReactNode, Dispatch } from 'react'
+import { createContext, useReducer, ReactNode } from 'react'
 import { State, StoreContextValue, StoreAction, Item } from '../type/StoreType'
 import Cookie from 'js-cookie'
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const Store = createContext<StoreContextValue | undefined>(undefined);

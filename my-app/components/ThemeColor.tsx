@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from "next-themes"
 import { BsMoon } from 'react-icons/bs'
 import { BsSun } from 'react-icons/bs'

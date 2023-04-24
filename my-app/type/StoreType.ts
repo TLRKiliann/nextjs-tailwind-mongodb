@@ -27,7 +27,7 @@ export type State = {
 }
 
 export type StoreAction = {
-  type: 'CART_ADD_ITEM' | 'CART_REMOVE_ITEM' | 'CART_RESET' | 'SAVE_SHIPPING_ADDRESS';
+  type: 'CART_ADD_ITEM' | 'CART_REMOVE_ITEM' | 'CART_RESET' | 'CART_CLEAR_ITEMS';
   payload?: Item;
 }
 
