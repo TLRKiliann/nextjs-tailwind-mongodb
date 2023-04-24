@@ -179,5 +179,4 @@ export default function PlaceorderScreen() {
     </Layout>
   )
 }
-
 PlaceorderScreen.auth = true;

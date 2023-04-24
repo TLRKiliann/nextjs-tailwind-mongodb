@@ -23,22 +23,11 @@ type ProductProps = {
     description: string;
 }
 
-type ProductsProps = {
-  products:{
-    name: string;
-    slug: string;
-    category: string;
-    image: string;
-    price: number;
-    brand: string;
-    rating: number;
-    numReviews: number;
-    countInStock: number;
-    description: string;
-  }[]
+type AllProductsProps = {
+  products: ProductProps[];
 }
 
-export default function Home({ products }: ProductsProps) {
+export default function Home({ products }: AllProductsProps) {
 
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state || { cart: {} }

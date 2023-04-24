@@ -61,8 +61,8 @@ export default function ProductScreen(props: ProductProps) {
           <Image
             src={product.image}
             alt={product.name}
-            width="430"
-            height="700"
+            width={400}
+            height={400}
           />
         </div>
         <div>

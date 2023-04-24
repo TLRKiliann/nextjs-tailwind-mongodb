@@ -1,5 +1,5 @@
 import { State, Item, StoreContextValue } from '@/type/StoreType'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { ReactNode, useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import Cookies from 'js-cookie'
@@ -61,8 +61,7 @@ export default function Layout({ title, children }: PropsValues) {
                 <p className="mr-16">
                   loading
                 </p>
-                ) : 
-                session?.user ? (
+                ) : session?.user ? (
                   <Menu as="div" className="mr-20 text-md">
                     <Menu.Button className="text-blue-600">
                       { session.user.name }

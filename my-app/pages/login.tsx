@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { signIn, useSession } from 'next-auth/react'
@@ -13,10 +13,11 @@ type LoginFormInputs = {
 };
 
 export default function LoginScreen() {
+  const { data: session } = useSession();
 
   const router = useRouter();
-  const { redirect } = router.query;
-  const { data: session } = useSession();
+  const { redirect } = parseInt(router.query as string);
+  //const redirect = router.query;
 
   useEffect(() => {
     if (session?.user) {
@@ -41,7 +42,7 @@ export default function LoginScreen() {
     }
   } 
   return (
-    <Layout title="login">
+    <Layout title="Login">
       <form
         className="mt-20 mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
@@ -100,7 +101,7 @@ export default function LoginScreen() {
             Don't have an account ?
           </p>
           <Link 
-            href="register"
+            href={`/register?redirect=${redirect || '/'}`}
             className="px-4 text-lg text-red-400 hover:text-green-400"
           >
             Register

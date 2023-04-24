@@ -31,6 +31,7 @@ function reducer(state: State, action: Action) {
 }
 
 function OrderScreen() {
+  //const query = useRouter();
   const { query } = useRouter();
   const orderId = query.id;
 
