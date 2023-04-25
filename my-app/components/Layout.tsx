@@ -11,6 +11,8 @@ import SuperHead from './SuperHead'
 import Footer from './Footer'
 import DropdownLink from './DropdownLink'
 import { Store } from '@/utils/Store'
+import { BiFemaleSign } from 'react-icons/bi'
+import { BiMaleSign } from 'react-icons/bi'
 
 interface PropsValues {
   title?: string;
@@ -44,11 +46,14 @@ export default function Layout({ title, children }: PropsValues) {
         <header>
 
           <nav className="mt-7 flex h-12 px-4 justify-between shadow-md item-center">
-            <a href="/" className="text-lg text-bold">
+            <a href="/" className="flex uppercase text-2xl font-bold leading-6">
               Clothing Store
+            <div className="ml-2 flex justify-start text-2xl">
+              <BiFemaleSign /><BiMaleSign />
+            </div>
             </a>
             <div className="flex">
-              <button onClick={() => router.push('/cart')} className="mr-10 flex text-md">
+              <button onClick={() => router.push('/cart')} className="mr-10 flex text-lg">
                 Cart
               {cartItemsCount > 0 && (
                 <span className="mt-3 ml-7 absolute px-2 rounded-full bg-red-600 px-1 py-1 
@@ -63,7 +68,7 @@ export default function Layout({ title, children }: PropsValues) {
                 </p>
                 ) : session?.user ? (
                   <Menu as="div" className="mr-20 text-md">
-                    <Menu.Button className="text-blue-600">
+                    <Menu.Button className="text-fushia-400">
                       { session.user.name }
                     </Menu.Button>
                     <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-lg">
@@ -86,7 +91,7 @@ export default function Layout({ title, children }: PropsValues) {
                     </Menu.Items>
                   </Menu>
                 ) : (
-                  <a href="/login" className="mr-20">
+                  <a href="/login" className="mr-20 flex text-lg">
                     Login
                   </a>
               )}

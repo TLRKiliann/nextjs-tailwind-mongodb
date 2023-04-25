@@ -33,8 +33,8 @@ export default function ThemeColor() {
 
         <div>
           <button onClick={switchTheme} className="absolute p-3
-            top-4 mr-3 top-0 right-0 text-yellow-300 bg-slate-700
-            brightness-95 rounded-full drop-shadow-md">
+            top-4 mr-3 top-0 right-0 text-green-400 bg-slate-800
+            rounded-full drop-shadow-md">
             <BsSun size={24} />
           </button>
         </div>

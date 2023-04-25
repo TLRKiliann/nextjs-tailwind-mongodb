@@ -9,7 +9,7 @@
 }
 
 .primary-button {
-  @apply rounded bg-amber-500 px-8 py-2 shadow outline-none hover:bg-amber-400 active:bg-amber-600;
+  @apply rounded bg-fuchsia-700 px-8 py-2 shadow outline-none text-slate-50 hover:bg-fuchsia-600 active:bg-fuchsia-500;
 }
 
 .secondary-button {

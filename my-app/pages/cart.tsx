@@ -37,8 +37,7 @@ const CartScreen = () => {
         cartItems.length === 0 ? (
         <div className="m-4">
           Cart is empty. 
-          <Link href={"/"} className="rounded-full ml-4 primary-button 
-            text-blue-800 hover:text-white"
+          <Link href={"/"} className="rounded-full ml-4 text-slate-50 primary-button"
           >
             Go Shopping
           </Link>
