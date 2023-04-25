@@ -92,7 +92,7 @@ const CartScreen = () => {
                       </select>
                     </td>
                     <td className="p-5 text-center">
-                      {item.price}
+                      ${item.price}
                     </td>
                     <td className="p-5 text-center">
                       <button type='button' onClick={() => removeItemHandler(item)}>

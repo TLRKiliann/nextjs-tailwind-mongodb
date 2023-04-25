@@ -3,21 +3,11 @@ import { useEffect, useReducer } from 'react'
 import Image from 'next/image'
 import axios from 'axios'
 import Layout from '@/components/Layout'
-import Order from '@/models/Order'
+//import Order from '@/models/Order'
 import { getError } from '@/utils/error'
 
-type State = {
-  loading: boolean;
-  order: typeof Order | {};
-  error: string;
-};
 
-type Action = {
-  type: 'FETCH_REQUEST' | 'FETCH_SUCCESS' | 'FETCH_FAIL'
-  payload?: typeof Order | string;
-}
-
-function reducer(state: State, action: Action) {
+function reducer(state, action) {
   switch(action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -31,11 +21,12 @@ function reducer(state: State, action: Action) {
 }
 
 function OrderScreen() {
-  //const query = useRouter();
-  const { query } = useRouter();
+  const query = useRouter();
+  //query or {query}
+  //const orderId = parseInt(query.toString());
   const orderId = query.id;
 
-  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, order }, dispatch, ] = useReducer(reducer, {
     loading: true,
     order: {},
     error: '',
@@ -110,8 +101,6 @@ function OrderScreen() {
           <div className="card overflow-x-auto p-5">
             <h2 className="mb-2 text-lg">Order Items</h2>
             
-
-
             <table className="min-w-full">
               <thead className="border-b">
                 <tr>

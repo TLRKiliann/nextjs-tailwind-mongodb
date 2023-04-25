@@ -2,15 +2,14 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 
-type UnauthorizedProps = {}
 
-export default function Unauthorized(props: UnauthorizedProps): JSX.Element {
+export default function Unauthorized() {
 
   const router = useRouter()
   const message = router.query
 
   return (
-    <Layout title="Unauthorized page ">
+    <Layout title="Unauthorized page">
       <h1 className="mb-2 ml-4 text-xl">Access Denied ! </h1>
       <button
         onClick={() => router.push('/login')}

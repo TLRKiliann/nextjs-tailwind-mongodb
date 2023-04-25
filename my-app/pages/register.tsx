@@ -118,7 +118,7 @@ export default function RegisterScreen() {
                 message: "password is more than 5 chars"
               },
             })}
-            className="w-full" id="password" autoFocus
+            className="w-full" id="confirmPassword" autoFocus
           />
           {errors.confirmPassword && (
             <div className="text-red-500">
