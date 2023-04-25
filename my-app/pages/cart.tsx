@@ -1,7 +1,7 @@
 'use client'
 
 import { StoreContextValue, Item } from '@/type/StoreType'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -92,7 +92,7 @@ const CartScreen = () => {
                       </select>
                     </td>
                     <td className="p-5 text-center">
-                      {item.price}
+                      ${item.price}
                     </td>
                     <td className="p-5 text-center">
                       <button type='button' onClick={() => removeItemHandler(item)}>

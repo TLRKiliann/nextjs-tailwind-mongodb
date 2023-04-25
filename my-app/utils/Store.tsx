@@ -1,9 +1,9 @@
-import React, { createContext, useReducer, ReactNode, Dispatch } from 'react'
+import { createContext, useReducer, ReactNode } from 'react'
 import { State, StoreContextValue, StoreAction, Item } from '../type/StoreType'
 import Cookie from 'js-cookie'
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const Store = createContext<StoreContextValue | undefined>(undefined);
@@ -38,6 +38,10 @@ function reducer(state: State, action: StoreAction): State {
       Cookie.set('cart', JSON.stringify({ ...initialState.cart }));
       return { ...state, cart: { ...initialState.cart } };
     }
+    case 'CART_CLEAR_ITEMS':
+      return {
+        ...state, cart: { ...state.cart, cartItems: []}
+      }
     case 'SAVE_SHIPPING_ADDRESS':
       return {
         ...state,

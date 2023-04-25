@@ -1,27 +1,29 @@
 import { GetServerSideProps } from 'next'
-import { StoreContextValue, Item } from '@/../type/StoreType'
+import { StoreContextValue, Item } from '@/type/StoreType'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useContext } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Layout from '@/../components/Layout'
-import { Store } from '@/../utils/Store'
-import db from '@/../utils/db'
-import Product from '@/../models/Product'
+import Layout from '@/components/Layout'
+import { Store } from '@/utils/Store'
+import db from '@/utils/db'
+import Product from '@/models/Product'
 
 type ProductProps = {
-  slug: string;
-  name: string;
-  category: string;
-  brand: string;
-  image: string;
-  price: number;
-  countInStock: number;
-  description: string;
-  rating: number;
-  numReviews: number;
+  product: {
+    slug: string;
+    name: string;
+    category: string;
+    brand: string;
+    image: string;
+    price: number;
+    countInStock: number;
+    description: string;
+    rating: number;
+    numReviews: number;
+  }
 }
 
 export default function ProductScreen(props: ProductProps) {
@@ -59,8 +61,8 @@ export default function ProductScreen(props: ProductProps) {
           <Image
             src={product.image}
             alt={product.name}
-            width="430"
-            height="700"
+            width={400}
+            height={400}
           />
         </div>
         <div>

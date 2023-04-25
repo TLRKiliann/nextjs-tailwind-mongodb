@@ -13,8 +13,9 @@ import { Store } from '@/utils/Store'
 
 export default function PlaceorderScreen() {
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
-  const { cart }: State = state || { cart: {} }
-  const { cartItems, shippingAddress, paymentMethod } = cart
+  const { cart }: State = state || { cart: {} };
+  console.log(cart)
+  const { cartItems, shippingAddress, paymentMethod } = cart;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100
   const itemsPrice = round2(cartItems.reduce((a, c) => a + c.quantity * c.price, 0))
@@ -179,5 +180,4 @@ export default function PlaceorderScreen() {
     </Layout>
   )
 }
-
 PlaceorderScreen.auth = true;
