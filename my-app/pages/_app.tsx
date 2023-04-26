@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ThemeProvider } from "next-themes"
 import { SessionProvider, useSession } from 'next-auth/react'
 import { StoreProvider } from '../utils/Store'
+import "@fontsource/acme"
 
 
 export default function App({ Component, pageProps: {session, ...pageProps}, }: AppProps) {
