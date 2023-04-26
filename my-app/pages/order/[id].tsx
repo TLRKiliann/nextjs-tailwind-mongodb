@@ -3,11 +3,35 @@ import { useEffect, useReducer } from 'react'
 import Image from 'next/image'
 import axios from 'axios'
 import Layout from '@/components/Layout'
-//import Order from '@/models/Order'
 import { getError } from '@/utils/error'
 
 
-function reducer(state, action) {
+interface OrderState {
+  loading: boolean;
+  error: string;
+  order: {
+  _id?: string;
+  shippingAddress?: string;
+  paymentMethod?: string;
+  orderItems?: [];
+  itemsPrice?: number;
+  taxPrice?: number;
+  shippingPrice?: number;
+  totalPrice?: number;
+  isPaid?: boolean;
+  paidAt?: string;
+  isDelivered?: boolean;
+  deliveredAt?: string;
+  };
+}
+
+type OrderAction =
+  | { type: 'FETCH_REQUEST' }
+  | { type: 'FETCH_SUCCESS'; payload: OrderState['order'] }
+  | { type: 'FETCH_FAIL'; payload: string };
+
+
+function reducer(state: OrderState, action: OrderAction) {
   switch(action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -22,9 +46,7 @@ function reducer(state, action) {
 
 function OrderScreen() {
   const query = useRouter();
-  //query or {query}
-  //const orderId = parseInt(query.toString());
-  const orderId = query.id;
+  const orderId = query.id as string;
 
   const [{ loading, error, order }, dispatch, ] = useReducer(reducer, {
     loading: true,

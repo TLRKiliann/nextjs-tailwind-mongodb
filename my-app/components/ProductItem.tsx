@@ -17,12 +17,14 @@ type ProductProps = {
 
 export default function ProductItem({ product, addToCartHandler }: ProductProps) {
   return (
-    <div className="card">
+    <div className="card m-auto">
       <a href={`/product/${product.slug}`}>
         <img
           src={product.image}
+          width={300}
+          height={300}
           alt={product.name}
-          className="rounded shadow"
+          className="rounded-t-lg"
         />
       </a>
 

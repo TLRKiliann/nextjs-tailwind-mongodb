@@ -50,19 +50,20 @@ export default function ProductScreen(props: ProductProps) {
 
   return (
     <Layout title={product.name}>
-      <div className="w-1/3 ml-24 py-2">
-        <Link href={'/'} className="text-orange-400"
+      <div className="ml-28">
+        <Link href={'/'} className="ml-2 text-lg text-sky-500"
         >
           Back to products
         </Link>
       </div>
-      <div className="ml-24 grid md:grid-cols-4 md:gap-3">
-        <div className="md:col-span-2">
+      <div className="grid md:grid-cols-4 md:gap-3">
+        <div className="md:col-span-2 m-auto">
           <Image
             src={product.image}
             alt={product.name}
             width={400}
             height={400}
+            className="rounded shadow-lg"
           />
         </div>
         <div>

@@ -1,14 +1,14 @@
 //import mongoose from "mongoose";
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-export interface OrderItemType extends Document {
+export type OrderItemType = {
   name: string;
   quantity: number;
   image: string;
   price: number;
 }
 
-export interface ShippingAddressType extends Document {
+export type ShippingAddressType = {
   fullName: string;
   address: string;
   city: string;
@@ -16,11 +16,18 @@ export interface ShippingAddressType extends Document {
   country: string;
 }
 
-export interface OrderType extends Document {
+export type PaymentResultType = {
+  id: string;
+  status: string;
+  email_address: string;
+};
+
+export type OrderType = {
   user: mongoose.Schema.Types.ObjectId;
   orderItems: OrderItemType[];
   shippingAddress: ShippingAddressType;
   paymentMethod: string;
+  paymentResult?: PaymentResultType;
   itemsPrice: number;
   shippingPrice: number;
   taxPrice: number;
@@ -50,6 +57,7 @@ const OrderSchema:Schema = new mongoose.Schema(
       country: { type: String, required: true }
     },
     paymentMethod: { type: String, required: true },
+    paymentResult: { id: String, status: String, email_address: String },
     itemsPrice: { type: Number, required: true },
     shippingPrice: { type: Number, required: true },
     taxPrice: { type: Number, required: true },

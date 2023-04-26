@@ -5,7 +5,7 @@
 :root {}
 
 .card {
-  @apply mb-0 block rounded-lg border border-gray-200 shadow-md;
+  @apply mb-4 block border border-slate-50/40 rounded-lg shadow-lg;
 }
 
 .primary-button {

@@ -73,7 +73,7 @@ export default function Layout({ title, children }: PropsValues) {
                 </p>
                 ) : session?.user ? (
                   <Menu as="div" className="mr-20 text-md">
-                    <Menu.Button className="text-fushia-400">
+                    <Menu.Button className="text-lg text-sky-500">
                       { session.user.name }
                     </Menu.Button>
                     <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-lg">

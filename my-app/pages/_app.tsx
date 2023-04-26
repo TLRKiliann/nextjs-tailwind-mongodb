@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { ThemeProvider } from "next-themes"
 import { SessionProvider, useSession } from 'next-auth/react'
@@ -13,7 +13,7 @@ export default function App({ Component, pageProps: {session, ...pageProps}, }: 
     <ThemeProvider attribute="class">
       <SessionProvider session={session}>
         <StoreProvider>
-        {Component.auth? (
+        {Component.auth ? (
           <Auth>
             <Component {...pageProps} />
           </Auth>
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps: {session, ...pageProps}, }: 
 }
 
 type ChildrenProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 function Auth({ children }: ChildrenProps) {
