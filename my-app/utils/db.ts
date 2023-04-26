@@ -1,43 +1,40 @@
-import mongoose, { Connection } from "mongoose";
+import mongoose from 'mongoose';
 
-type ConnectionProps = {
-  isConnected: number | boolean;
-}
+const connection = {};
 
-const connection: ConnectionProps = { isConnected: false };
-
-async function connect(): Promise<void> {
+async function connect() {
   if (connection.isConnected) {
-    console.log("Already connected");
-  return;
+    console.log('already connected');
+    return;
   }
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("new connection");
-    connection.isConnected = mongoose.connection.readyState;
-  } catch (error) {
-    console.log("Error connecting to database: ", error);
+  if (mongoose.connections.length > 0) {
+    connection.isConnected = mongoose.connections[0].readyState;
+    if (connection.isConnected === 1) {
+      console.log('use previous connection');
+      return;
+    }
+    await mongoose.disconnect();
   }
+  const db = await mongoose.connect(process.env.MONGODB_URI);
+  console.log('new connection');
+  connection.isConnected = db.connections[0].readyState;
 }
 
-async function disconnect(): Promise<void> {
-  if (process.env.NODE_ENV === "production") {
-    try {
+async function disconnect() {
+  if (connection.isConnected) {
+    if (process.env.NODE_ENV === 'production') {
       await mongoose.disconnect();
       connection.isConnected = false;
-    } catch (error) {
-      console.log("Error disconnecting from database: ", error);
+    } else {
+      console.log('not disconnected');
     }
-  } else {
-    console.log("db not connected");
   }
 }
-
 function convertDocToObj(doc) {
-  doc._id = doc._id.toString()
-  doc.createdAt = doc.createdAt.toString()
-  doc.updatedAt = doc.updatedAt.toString()
-  return doc
+  doc._id = doc._id.toString();
+  doc.createdAt = doc.createdAt.toString();
+  doc.updatedAt = doc.updatedAt.toString();
+  return doc;
 }
 
 const db = { connect, disconnect, convertDocToObj };
