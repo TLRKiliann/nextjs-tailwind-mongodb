@@ -144,13 +144,13 @@ export default function RegisterScreen() {
         
         <div className="flex items-center justify-start">
           <p className="text-orange-400">
-            Don't have an account ?
+            Don't want to register ?
           </p>
           <Link 
-            href={`/register?redirect=${redirect || '/'}`}
+            href={'/'}
             className="px-4 text-lg text-red-400 hover:text-green-400"
           >
-            Register
+            Go back to Shop
           </Link>
         </div>
 

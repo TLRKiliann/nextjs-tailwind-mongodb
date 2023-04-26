@@ -37,7 +37,8 @@ const CartScreen = () => {
         cartItems.length === 0 ? (
         <div className="m-4">
           Cart is empty. 
-          <Link href={"/"} className="rounded-full ml-4 text-slate-50 primary-button"
+          <Link href={"/"}
+            className="rounded-full ml-4 text-slate-50 primary-button"
           >
             Go Shopping
           </Link>
@@ -48,7 +49,7 @@ const CartScreen = () => {
             <table className="min-w-full">
               <thead className="border">
                 <tr>
-                  <th className="px-5 text-left">Item1</th>
+                  <th className="px-8 text-left">Item1</th>
                   <th className="px-5 text-left">Item</th>
                   <th className="px-5 text-center">Quantity</th>
                   <th className="px-5 text-center">Price</th>
@@ -60,16 +61,16 @@ const CartScreen = () => {
                   <tr key={item.slug} className="border">
                     <td>
                       <Link href={`/product/${item.slug}`}>
-                        <div className="flex-col items-center">
+                        <div className="w-28 flex-col items-center">
                           <Image
                             src={item.image}
                             alt={item.name}
                             width={70}
                             height={70}
-                            className="mb-0 ml-3"
+                            className="m-auto mt-2 mb-2"
                           />
-                          &nbsp;
-                          <p className="ml-2 text-xs">{item.name}</p>
+                          
+                          <p className="m-auto text-xs text-center">{item.name}</p>
                         </div>
                       </Link>
                     </td>
@@ -103,10 +104,10 @@ const CartScreen = () => {
               </tbody>
             </table>
           </div>
-          <div className="card p-5">
+          <div className="card p-8 m-auto">
             <ul>
               <li>
-                <div className="pb-3 text-xl">
+                <div className="text-xl">
                   Subtotal {cartItems.reduce((a, c) => a + c.quantity, 0)} : $
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                 </div>
@@ -114,7 +115,9 @@ const CartScreen = () => {
               <li>
                 <button
                   onClick={() => router.push('/shipping')}
-                  className="primary-button w-full">Check Out</button>
+                  className="primary-button w-full mt-2">
+                    Check Out
+                </button>
               </li>
             </ul>
           </div>

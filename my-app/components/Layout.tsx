@@ -45,19 +45,24 @@ export default function Layout({ title, children }: PropsValues) {
         
         <header>
 
-          <nav className="mt-7 flex h-12 px-4 justify-between shadow-md item-center">
-            <a href="/" className="flex uppercase text-2xl font-bold leading-6">
+          <nav className="mt-7 h-12 flex px-4 justify-between shadow-md item-center">
+            <a 
+              href="/" 
+              style={{fontFamily: "Acme"}}
+              className="flex uppercase text-3xl font-bold leading-6"
+            >
               Clothing Store
-            <div className="ml-2 flex justify-start text-2xl">
-              <BiFemaleSign /><BiMaleSign />
+            <div className="flex ml-2 justify-start text-2xl">
+              <BiFemaleSign size={26} className="rounded backdrop-blur-none" />
+              <BiMaleSign size={26} className="rounded backdrop-blur-none" />
             </div>
             </a>
             <div className="flex">
               <button onClick={() => router.push('/cart')} className="mr-10 flex text-lg">
                 Cart
               {cartItemsCount > 0 && (
-                <span className="mt-3 ml-7 absolute px-2 rounded-full bg-red-600 px-1 py-1 
-                  text-xs font-bold text-white">
+                <span className="absolute mt-3 ml-9 rounded-full bg-red-600 px-2 py-1 
+                  text-xs text-white font-bold">
                   { cartItemsCount }
                 </span>
               )}

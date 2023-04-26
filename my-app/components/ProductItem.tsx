@@ -32,7 +32,11 @@ export default function ProductItem({ product, addToCartHandler }: ProductProps)
         </a>
         <p className="text-lg">{product.brand}</p>
         <p className="mb-2 text-lg">${product.price}</p>
-        <button type="button" onClick={() => addToCartHandler(product)} className="primary-button">
+        <button
+          type="button"
+          onClick={() => addToCartHandler(product)}
+          className="primary-button"
+        >
           Add to cart
         </button>
       </div>

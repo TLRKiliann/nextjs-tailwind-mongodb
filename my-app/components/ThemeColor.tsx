@@ -23,7 +23,7 @@ export default function ThemeColor() {
       {theme === "light" && isMounted === true ? (
         <div>
           <button onClick={switchTheme} className="absolute p-3
-            top-4 mr-3 top-0 right-0 text-slate-600 bg-slate-100
+            top-5 mr-3 right-0 text-slate-600 bg-slate-50
             rounded-full drop-shadow-md">
             <BsMoon size={18} />
           </button>
@@ -33,9 +33,9 @@ export default function ThemeColor() {
 
         <div>
           <button onClick={switchTheme} className="absolute p-3
-            top-4 mr-3 top-0 right-0 text-green-400 bg-slate-800
+            top-5 mr-3 right-0 text-orange-300 bg-slate-800
             rounded-full drop-shadow-md">
-            <BsSun size={24} />
+            <BsSun size={22} />
           </button>
         </div>
       )}
