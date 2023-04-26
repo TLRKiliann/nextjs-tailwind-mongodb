@@ -47,7 +47,7 @@ const CartScreen = () => {
         <div className="m-4 grid md:grid-cols-4 md:gap-5">
           <div className="overflow-x-auto md:col-span-3">
             <table className="min-w-full">
-              <thead className="border">
+              <thead className="border-t border-b border-slate-50/40 rounded-lg shadow shadow-lg">
                 <tr>
                   <th className="px-8 text-left">Item1</th>
                   <th className="px-5 text-left">Item</th>
@@ -58,7 +58,7 @@ const CartScreen = () => {
               </thead>
               <tbody>
                 {cartItems.map((item: Item) => (
-                  <tr key={item.slug} className="border">
+                  <tr key={item.slug} className="border-b border-slate-50/40 rounded-lg shadow shadow-lg">
                     <td>
                       <Link href={`/product/${item.slug}`}>
                         <div className="w-28 flex-col items-center">
@@ -107,7 +107,7 @@ const CartScreen = () => {
           <div className="card p-8 m-auto">
             <ul>
               <li>
-                <div className="text-xl">
+                <div className="text-xl font-bold">
                   Subtotal {cartItems.reduce((a, c) => a + c.quantity, 0)} : $
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                 </div>

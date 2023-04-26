@@ -24,16 +24,16 @@ export default function ProductItem({ product, addToCartHandler }: ProductProps)
           width={300}
           height={300}
           alt={product.name}
-          className="rounded-t-lg"
+          className="rounded-t-lg opacity-90 hover:opacity-100"
         />
       </a>
 
       <div className="flex flex-col items-center justify-center p-5">
         <a href={`/product/${product.slug}`}>
-          <h2 className="text-2xl font-serif">{product.name}</h2>
+          <h2 className="text-xl font-serif">{product.name}</h2>
         </a>
-        <p className="text-lg">{product.brand}</p>
-        <p className="mb-2 text-lg">${product.price}</p>
+        <p className="text-lg font-serif">{product.brand}</p>
+        <p className="mb-2 text-lg font-serif">${product.price}</p>
         <button
           type="button"
           onClick={() => addToCartHandler(product)}
