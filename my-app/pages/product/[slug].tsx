@@ -50,14 +50,14 @@ export default function ProductScreen(props: ProductProps) {
 
   return (
     <Layout title={product.name}>
-      <div className="ml-28">
-        <Link href={'/'} className="ml-2 text-lg text-sky-500"
+      <div className="md:ml-12 xs:w-full">
+        <Link href={'/'} className="md:ml-2 text-lg text-sky-500 xs:w-full"
         >
           Back to products
         </Link>
       </div>
-      <div className="grid md:grid-cols-4 md:gap-3">
-        <div className="md:col-span-2 m-auto">
+      <div className="md:ml-12 grid md:grid-cols-4 md:gap-3">
+        <div className="md:col-span-2">
           <Image
             src={product.image}
             alt={product.name}
@@ -66,8 +66,8 @@ export default function ProductScreen(props: ProductProps) {
             className="rounded shadow-lg"
           />
         </div>
-        <div>
-          
+
+        <div className="p-2">
           <ul>
             <li>
               <h1 className="text-lg">{product.name}</h1>
@@ -77,18 +77,18 @@ export default function ProductScreen(props: ProductProps) {
             <li>{product.rating} of {product.numReviews} reviews</li>
             <li>Description: {product.description}</li>
           </ul>
-
         </div>
-        <div className="mr-24">
-          <div className="card p-5">
 
+        <div className="xs:m-auto">
+          <div className="card p-5 mr-12">
+            
             <div className="mb-2 flex justify-between">
-              <div>Price</div>
+              <div>Price :</div>
               <div>${product.price}</div>  
             </div>
 
             <div className="mb-2 flex justify-between">
-              <div>Status</div>
+              <div>Status :</div>
               <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>  
             </div>
 
