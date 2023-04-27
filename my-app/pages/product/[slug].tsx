@@ -50,13 +50,13 @@ export default function ProductScreen(props: ProductProps) {
 
   return (
     <Layout title={product.name}>
-      <div className="md:ml-12 xs:w-full">
-        <Link href={'/'} className="md:ml-2 text-lg text-sky-500 xs:w-full"
+      <div className="md:ml-12">
+        <Link href={'/'} className="text-lg text-sky-500"
         >
           Back to products
         </Link>
       </div>
-      <div className="md:ml-12 grid md:grid-cols-4 md:gap-3">
+      <div className="md:ml-12 ml-1 grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}
@@ -67,7 +67,7 @@ export default function ProductScreen(props: ProductProps) {
           />
         </div>
 
-        <div className="p-2">
+        <div className="m-2">
           <ul>
             <li>
               <h1 className="text-lg">{product.name}</h1>
@@ -79,8 +79,8 @@ export default function ProductScreen(props: ProductProps) {
           </ul>
         </div>
 
-        <div className="xs:m-auto">
-          <div className="card p-5 mr-12">
+        <div>
+          <div className="card p-5 md:mr-12">
             
             <div className="mb-2 flex justify-between">
               <div>Price :</div>

@@ -1,5 +1,3 @@
-'use client'
-
 import { StoreContextValue, Item } from '@/type/StoreType'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
@@ -32,7 +30,7 @@ const CartScreen = () => {
 
   return (
     <Layout title="Shopping Cart">
-      <h1 className="m-4 text-xl">Shopping Cart</h1>
+      <h1 className="mx-4 text-xl font-bold text-slate-500">Shopping Cart</h1>
       {
         cartItems.length === 0 ? (
         <div className="m-4">
@@ -47,7 +45,7 @@ const CartScreen = () => {
         <div className="m-4 grid md:grid-cols-4 md:gap-5">
           <div className="overflow-x-auto md:col-span-3">
             <table className="min-w-full">
-              <thead className="border-t border-b border-slate-50/40 rounded-lg shadow shadow-lg">
+              <thead className="border-t border-b border-slate-50/40 rounded-lg shadow shadow-sm">
                 <tr>
                   <th className="px-8 text-left">Item1</th>
                   <th className="px-5 text-left">Item</th>
@@ -58,7 +56,7 @@ const CartScreen = () => {
               </thead>
               <tbody>
                 {cartItems.map((item: Item) => (
-                  <tr key={item.slug} className="border-b border-slate-50/40 rounded-lg shadow shadow-lg">
+                  <tr key={item.slug} className="border-b border-slate-50/40 rounded-lg shadow shadow-sm">
                     <td>
                       <Link href={`/product/${item.slug}`}>
                         <div className="w-28 flex-col items-center">
@@ -104,9 +102,9 @@ const CartScreen = () => {
               </tbody>
             </table>
           </div>
-          <div className="card p-8 m-auto">
+          <div className="h-32 card p-4">
             <ul>
-              <li>
+              <li className="flex">
                 <div className="text-xl font-bold">
                   Subtotal {cartItems.reduce((a, c) => a + c.quantity, 0)} : $
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
@@ -115,7 +113,7 @@ const CartScreen = () => {
               <li>
                 <button
                   onClick={() => router.push('/shipping')}
-                  className="primary-button w-full mt-2">
+                  className="primary-button w-full mt-4">
                     Check Out
                 </button>
               </li>

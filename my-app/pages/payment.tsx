@@ -43,9 +43,12 @@ export default function PaymentScreen() {
       <CheckoutWizard activeStep={2} />
       <form 
         onSubmit={(e) => submitHandler(e)}
-        className="w-1/3 m-auto mt-32 px-10 py-2 bg-slate-100/60 border rounded-xl"  
+        className="rounded-xl border w-1/3 m-auto mt-32 px-10 py-2 bg-slate-100
+          dark:bg-slate-600 dark:border-none"  
       >
-        <h1 className="py-6 text-3xl text-slate-500 decoration-teal-600 font-bold">Payment Method</h1>
+        <h1 className="py-6 text-3xl text-slate-500 decoration-teal-600 font-bold dark:text-slate-400">
+          Payment Method
+        </h1>
         {
           ['PayPal', 'Stripe', 'CashOneDelivery'].map((payment) => (
             <div key={payment} className="ml-4 py-1">

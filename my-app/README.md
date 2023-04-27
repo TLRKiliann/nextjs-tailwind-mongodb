@@ -69,7 +69,7 @@ To display product by name & access to it by a new route.
 
 utils/Store
 
-`components/ProductItem.tsx (from Layout)`
+`components/ProductItem.tsx (from pages/index.tsx)`
 
 `pages/product/[slug].tsx`
 
