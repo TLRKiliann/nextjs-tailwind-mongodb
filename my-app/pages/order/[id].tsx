@@ -193,14 +193,25 @@ function OrderScreen() {
                 <div className="text-xl font-bold">${totalPrice}</div>
               </div>
             </li>
+
             <li className="flex w-full mt-2">
               <Link
                 href={'/'}
-                className="paypal-button w-full text-center"
+                className="paypal-button w-full flex justify-center"
               >
-                Paypal
+                <Image src={'/../public/images/paypal.png'} width={50} height={50} alt="paypay logo" />
               </Link>
             </li>
+
+            <li className="flex w-full mt-2">
+              <Link
+                href={'/'}
+                className="stripe-button w-full text-center"
+              >
+                Stripe
+              </Link>
+            </li>
+
           </ul>
         </div>
 

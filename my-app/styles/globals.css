@@ -22,7 +22,11 @@
 }
 
 .paypal-button {
-  @apply rounded bg-yellow-400 px-8 py-2 shadow outline-none text-blue-600 font-bold hover:bg-yellow-300 active:bg-yellow-200;
+  @apply rounded bg-yellow-400 px-8 py-0 shadow outline-none text-blue-600 font-bold hover:bg-yellow-300 active:bg-yellow-200;
+}
+
+.stripe-button {
+  @apply rounded bg-sky-500 px-8 py-3 shadow outline-none text-lg text-slate-50 font-bold hover:contrast-100 hover:bg-sky-400 active:bg-sky-300;
 }
 
 input,

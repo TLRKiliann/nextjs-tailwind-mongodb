@@ -41,7 +41,8 @@ export default function Layout({ title, children }: PropsValues) {
 
       <ToastContainer position="bottom-center" limit={1} />
 
-      <div className="flex min-h-screen flex-col justify-between">
+      <div className="flex min-h-screen flex-col justify-between bg-gradient-to-r from-slate-300 to-slate-100
+        dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-700">
         
         <header>
 
@@ -74,15 +75,14 @@ export default function Layout({ title, children }: PropsValues) {
               )}
               </button>
               {status === 'loading' ? (
-
                 <p className="mr-24 flex text-xl text-slate-500 dark:text-slate-400">
                   loading
                 </p>
                 
                 ) : session?.user ? (
                   <Menu as="div" className="mr-14 md:mr-20 text-md">
-                    <Menu.Button style={{fontFamily: "Acme"}} 
-                      className="md:text-2xl text-sky-600 dark:text-cyan-400">
+                    <Menu.Button 
+                      className="md:text-xl text-sky-600 dark:text-cyan-400">
                       { session.user.name }
                     </Menu.Button>
                     <Menu.Items className="absolute z-2 right-0 w-56 origin-top-right shadow-lg">
