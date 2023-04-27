@@ -74,15 +74,14 @@ export default function Layout({ title, children }: PropsValues) {
               )}
               </button>
               {status === 'loading' ? (
-
                 <p className="mr-24 flex text-xl text-slate-500 dark:text-slate-400">
                   loading
                 </p>
                 
                 ) : session?.user ? (
                   <Menu as="div" className="mr-14 md:mr-20 text-md">
-                    <Menu.Button style={{fontFamily: "Acme"}} 
-                      className="md:text-2xl text-sky-600 dark:text-cyan-400">
+                    <Menu.Button 
+                      className="md:text-xl text-sky-600 dark:text-cyan-400">
                       { session.user.name }
                     </Menu.Button>
                     <Menu.Items className="absolute z-2 right-0 w-56 origin-top-right shadow-lg">
