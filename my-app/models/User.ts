@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { model, models, Schema, Model, Document } from 'mongoose';
 
-const userSchema = new mongoose.Schema(
+interface UserProps extends Document {
+	name: string;
+	email: string;
+	password : string;
+	isAdmin: boolean;
+}
+
+const userSchema:Schema = new mongoose.Schema(
 	{
 		name: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
@@ -12,5 +19,5 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const User: Model<UserProps> = models.User || model('User', userSchema);
 export default User;

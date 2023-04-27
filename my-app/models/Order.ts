@@ -1,5 +1,4 @@
-//import mongoose from "mongoose";
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
 export type OrderItemType = {
   name: string;
@@ -74,8 +73,3 @@ const OrderSchema:Schema = new mongoose.Schema(
 
 const Order: Model<OrderType> = mongoose.models.Order || mongoose.model<OrderType>('Order', OrderSchema);
 export default Order;
-
-/*
-const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
-export default Order;
-*/

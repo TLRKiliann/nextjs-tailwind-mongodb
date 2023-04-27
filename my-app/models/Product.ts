@@ -1,6 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { model, models, Schema, Model, Document } from 'mongoose';
 
-const ProductSchema = new mongoose.Schema(
+interface ProductProps extends Document {
+  name: string;
+  slug: string;
+  category: string;
+  image: string;
+  price: string;
+  brand: string;
+  rating: number;
+  numReviews: number; 
+  countInStock: number;
+  description: string;
+}
+
+const ProductSchema:Schema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
@@ -18,5 +31,5 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
-const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+const Product: Model<ProductProps> = models.Product || model('Product', ProductSchema);
 export default Product;
