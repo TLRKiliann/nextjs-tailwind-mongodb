@@ -30,10 +30,10 @@ export default function ProductItem({ product, addToCartHandler }: ProductProps)
 
       <div className="flex flex-col items-center justify-center p-5">
         <a href={`/product/${product.slug}`}>
-          <h2 className="text-xl font-serif">{product.name}</h2>
+          <h2 className="text-xl font-serif dark:text-cyan-400">{product.name}</h2>
         </a>
-        <p className="text-lg font-serif">{product.brand}</p>
-        <p className="mb-2 text-lg font-serif">${product.price}</p>
+        <p className="text-lg font-serif dark:text-cyan-400">{product.brand}</p>
+        <p className="mb-2 text-lg font-serif dark:text-slate-300">${product.price}</p>
         <button
           type="button"
           onClick={() => addToCartHandler(product)}

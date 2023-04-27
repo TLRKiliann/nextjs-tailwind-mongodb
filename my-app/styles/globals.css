@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {}
+:root {
+  --fg: #000;
+  --bg: #fff;
+}
 
 .card {
   @apply mb-4 block border border-slate-50/40 rounded-lg shadow-lg;
@@ -27,7 +30,7 @@ textarea {
 }
 
 .dropdown-link {
-  @apply flex p-2 hover:bg-gray-200;
+  @apply flex p-2 hover:bg-gray-400;
 }
 
 .alert-error {

@@ -9,20 +9,22 @@ import "@fontsource/acme"
 
 
 export default function App({ Component, pageProps: {session, ...pageProps}, }: AppProps) {
-  return (
-    <ThemeProvider attribute="class">
-      <SessionProvider session={session}>
-        <StoreProvider>
-        {Component.auth ? (
-          <Auth>
+  return (  
+    <SessionProvider session={session}>
+      <StoreProvider>
+      {Component.auth ? (
+        <Auth>
+          <ThemeProvider attribute="class">
             <Component {...pageProps} />
-          </Auth>
-        ) : (
+          </ThemeProvider>
+        </Auth>
+      ) : (
+        <ThemeProvider attribute="class">
           <Component {...pageProps} />
-        )}
-        </StoreProvider>
-      </SessionProvider>
-    </ThemeProvider>
+        </ThemeProvider>
+      )}
+      </StoreProvider>
+    </SessionProvider>
   )
 }
 

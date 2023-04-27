@@ -54,26 +54,29 @@ export default function Layout({ title, children }: PropsValues) {
               Clothing Store
             <div className="flex ml-2 justify-start text-2xl">
               <BiFemaleSign size={26} className="absolute top-6 text-pink-400 rounded backdrop-blur-none" />
-              <BiMaleSign size={26} className="absolute top-6 ml-6 text-sky-500 rounded backdrop-blur-none" />
+              <BiMaleSign size={26} className="absolute top-6 ml-6 text-sky-600 rounded backdrop-blur-none dark:text-cyan-400" />
             </div>
             </a>
             <div className="flex">
-              <button onClick={() => router.push('/cart')} className="mr-10 flex text-lg text-slate-500">
+              <button onClick={() => router.push('/cart')} className="mr-10 flex text-xl text-slate-400 dark:text-slate-400">
                 Cart
               {cartItemsCount > 0 && (
-                <span className="absolute mt-3 ml-9 rounded-full bg-red-600 px-2 py-1 
+                <span className="absolute mt-4 ml-9 rounded-full bg-red-600 px-2 py-1 
                   text-xs text-white font-bold">
                   { cartItemsCount }
                 </span>
               )}
               </button>
               {status === 'loading' ? (
-                <p className="mr-16">
+                <p className="mr-16 animate-spin">
+                  <svg className="animate-spin h-5 w-5 mr-3">
+
+                  </svg>
                   loading
                 </p>
                 ) : session?.user ? (
                   <Menu as="div" className="mr-20 text-md">
-                    <Menu.Button style={{fontFamily: "Acme"}} className="text-xl text-sky-500">
+                    <Menu.Button style={{fontFamily: "Acme"}} className="text-2xl text-sky-600 dark:text-cyan-400">
                       { session.user.name }
                     </Menu.Button>
                     <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-lg">
