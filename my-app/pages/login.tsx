@@ -17,13 +17,12 @@ export default function LoginScreen() {
 
   const router = useRouter();
   const { redirect } = parseInt(router.query as string);
-  //const redirect = router.query;
 
   useEffect(() => {
     if (user?.user) {
       router.push(redirect || '/');
     }
-  }, [router,user, redirect])
+  }, [router, user, redirect])
 
   const { handleSubmit, register, formState: { errors }, } = useForm<LoginFormInputs>();
 

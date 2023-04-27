@@ -53,10 +53,10 @@ export default function RegisterScreen() {
         className="mt-20 mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-2xl text-slate-500">Create Account</h1>
+        <h1 className="mb-4 text-2xl text-slate-400">Create Account</h1>
         
         <div className="mb-4">
-          <label htmlFor="name">name</label>
+          <label htmlFor="name">Name</label>
           <input type="text"
             {...register('name', {required: "Please enter name"})}
             className="w-full" id="name" autoFocus />

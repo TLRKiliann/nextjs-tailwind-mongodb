@@ -67,9 +67,9 @@ export default function PlaceorderScreen() {
       <CheckoutWizard activeStep={3} />
       <h1 className="m-4 text-2xl">Place Order</h1>
       {cartItems.length === 0 ? (
-        <div>
+        <div className="flex-col">
           Cart is empty !
-          <Link href="/">
+          <Link href="/" className="secondary-button ml-4">
             Go shopping
           </Link>
         </div>
