@@ -49,13 +49,13 @@ export default function Home({ products }: AllProductsProps) {
     <Layout title="Home page ">
       <main>
 
-        <h1 className="ml-4 text-3xl font-bold">
-          Dark mode with Tailwind and Next-themes
+        <h1 className="ml-4 text-xl text-slate-500 font-semibold dark:text-cyan-400">
+          NextJS TypeScript Tailwind & next-themes
         </h1>
 
-        <h2 className="mt-1 ml-4 text-2xl font-bold">E-commerce Next.js</h2>
+        <h2 className="mt-1 ml-4 text-lg text-slate-500 dark:text-slate-400">E-commerce NextJS</h2>
 
-        <div className="mt-10 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
+        <div className="mt-6 mr-14 ml-14 grid grid-cols-1 gap-14 md:grid-cols-3 lg:grid-cols-3">
           {products.map((product) => (
             <ProductItem key={product.slug} product={product} addToCartHandler={addToCartHandler} />
           ))}

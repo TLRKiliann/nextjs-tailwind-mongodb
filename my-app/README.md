@@ -34,9 +34,9 @@ Look at :
 
 `components/Layout.tsx`
 
-Head set for all pages
+SuperHeader set title for all pages
 
-header (with navbar)
+Layout (with navbar)
 
 main
 
@@ -69,6 +69,8 @@ To display product by name & access to it by a new route.
 
 utils/Store
 
+`components/ProductItem.tsx (from pages/index.tsx)`
+
 `pages/product/[slug].tsx`
 
 `components/Layout.tsx`
@@ -79,7 +81,7 @@ utils/Store
 
 └─ $ ▶ pnpm install @headlessui/react
 
-Files concerns :
+Files concerned :
 
 `Layout.tsx`
 

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 
 export type Item = {
-  countInStock(countInStock: any): unknown;
+  countInStock: number;
   quantity: number;
   name: string;
   slug: string;

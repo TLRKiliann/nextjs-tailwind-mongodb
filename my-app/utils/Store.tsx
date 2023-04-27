@@ -1,17 +1,17 @@
-import { createContext, useReducer, ReactNode } from 'react'
+import React, { createContext, useReducer, ReactNode } from 'react'
 import { State, StoreContextValue, StoreAction, Item } from '../type/StoreType'
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const Store = createContext<StoreContextValue | undefined>(undefined);
 
 const initialState: State = {
-  cart: Cookie.get('cart')
-    ? JSON.parse(Cookie.get('cart')!)
-    : { cartItems: [], shippingAddress: {location: {}, paymentMethod: ''} },
+  cart: Cookies.get('cart')
+    ? JSON.parse(Cookies.get('cart')!)
+    : { cartItems: [], shippingAddress: {}, paymentMethod: '' },
 };
 
 function reducer(state: State, action: StoreAction): State {
@@ -22,12 +22,12 @@ function reducer(state: State, action: StoreAction): State {
       const cartItems = existItem
         ? state.cart.cartItems.map((item) => (item.name === existItem.name ? newItem : item))
         : [...state.cart.cartItems, newItem];
-      Cookie.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_REMOVE_ITEM': {
       const cartItems = state.cart.cartItems.filter((item) => item.slug !== action.payload!.slug);
-      Cookie.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { 
         ...state,
         cart:
@@ -35,12 +35,17 @@ function reducer(state: State, action: StoreAction): State {
       }
     }
     case 'CART_RESET': {
-      Cookie.set('cart', JSON.stringify({ ...initialState.cart }));
-      return { ...state, cart: { ...initialState.cart } };
+      Cookies.set('cart', JSON.stringify({ ...initialState.cart }));
+      return { 
+        ...state,
+        cart: { 
+          ...initialState.cart } };
     }
     case 'CART_CLEAR_ITEMS':
       return {
-        ...state, cart: { ...state.cart, cartItems: []}
+        ...state,
+        cart: { 
+          ...state.cart, cartItems: [] }
       }
     case 'SAVE_SHIPPING_ADDRESS':
       return {

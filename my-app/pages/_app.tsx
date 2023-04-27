@@ -1,32 +1,35 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { ThemeProvider } from "next-themes"
 import { SessionProvider, useSession } from 'next-auth/react'
 import { StoreProvider } from '../utils/Store'
+import "@fontsource/acme"
 
 
 export default function App({ Component, pageProps: {session, ...pageProps}, }: AppProps) {
-  return (
-    <ThemeProvider attribute="class">
-      <SessionProvider session={session}>
-        <StoreProvider>
-        {Component.auth? (
-          <Auth>
+  return (  
+    <SessionProvider session={session}>
+      <StoreProvider>
+      {Component.auth ? (
+        <Auth>
+          <ThemeProvider attribute="class">
             <Component {...pageProps} />
-          </Auth>
-        ) : (
+          </ThemeProvider>
+        </Auth>
+      ) : (
+        <ThemeProvider attribute="class">
           <Component {...pageProps} />
-        )}
-        </StoreProvider>
-      </SessionProvider>
-    </ThemeProvider>
+        </ThemeProvider>
+      )}
+      </StoreProvider>
+    </SessionProvider>
   )
 }
 
 type ChildrenProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 function Auth({ children }: ChildrenProps) {

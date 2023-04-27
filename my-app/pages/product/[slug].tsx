@@ -50,23 +50,24 @@ export default function ProductScreen(props: ProductProps) {
 
   return (
     <Layout title={product.name}>
-      <div className="w-1/3 ml-24 py-2">
-        <Link href={'/'} className="text-orange-400"
+      <div className="md:ml-12">
+        <Link href={'/'} className="text-lg text-sky-500"
         >
           Back to products
         </Link>
       </div>
-      <div className="ml-24 grid md:grid-cols-4 md:gap-3">
+      <div className="md:ml-12 ml-1 grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}
             alt={product.name}
             width={400}
             height={400}
+            className="rounded shadow-lg"
           />
         </div>
-        <div>
-          
+
+        <div className="m-2">
           <ul>
             <li>
               <h1 className="text-lg">{product.name}</h1>
@@ -76,28 +77,29 @@ export default function ProductScreen(props: ProductProps) {
             <li>{product.rating} of {product.numReviews} reviews</li>
             <li>Description: {product.description}</li>
           </ul>
-
         </div>
-        <div className="mr-24">
-          <div className="card p-5">
 
+        <div>
+          <div className="card p-5 md:mr-12">
+            
             <div className="mb-2 flex justify-between">
-              <div>Price</div>
+              <div>Price :</div>
               <div>${product.price}</div>  
             </div>
 
             <div className="mb-2 flex justify-between">
-              <div>Status</div>
+              <div>Status :</div>
               <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>  
             </div>
-
-            <button
-              type='button'
-              onClick={addToCartHandler}
-              className="primary-button w-full"
-            >
-              Add to cart
-            </button>
+            <div>
+              <button
+                type='button'
+                onClick={addToCartHandler}
+                className="primary-button w-full"
+              >
+                Add to cart
+              </button>
+            </div>
 
           </div>
         </div>

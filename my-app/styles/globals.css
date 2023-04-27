@@ -2,18 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {}
+:root {
+  --fg: #000;
+  --bg: #fff;
+}
 
 .card {
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+  @apply mb-6 block border border-slate-50/40 rounded-lg shadow-lg dark:border-slate-50/10 dark:shadow-lg dark:shadow-slate-50/10;
 }
 
 .primary-button {
-  @apply rounded bg-amber-500 px-8 py-2 shadow outline-none hover:bg-amber-400 active:bg-amber-600;
+  @apply transition duration-300 ease-out rounded bg-blue-500 hover:bg-blue-400 active:bg-blue-300
+    px-8 py-2 shadow outline-none text-slate-50 
+    hover:ease-in dark:bg-fuchsia-700 dark:hover:bg-fuchsia-600 dark:active:bg-fuchsia-500;
 }
 
 .secondary-button {
-  @apply rounded bg-blue-500 px-8 py-2 text-slate-100 shadow outline-none hover:bg-blue-600 active:bg-amber-500;
+  @apply rounded bg-blue-500 px-8 py-2 text-slate-100 shadow outline-none hover:bg-blue-600 active:bg-blue-500;
+}
+
+.paypal-button {
+  @apply rounded bg-yellow-400 px-8 py-2 shadow outline-none text-blue-600 font-bold hover:bg-yellow-300 active:bg-yellow-200;
 }
 
 input,
@@ -23,7 +32,7 @@ textarea {
 }
 
 .dropdown-link {
-  @apply flex p-2 hover:bg-gray-200;
+  @apply flex p-2 hover:bg-gray-400;
 }
 
 .alert-error {

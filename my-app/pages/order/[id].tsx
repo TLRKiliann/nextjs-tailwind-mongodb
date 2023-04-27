@@ -1,13 +1,39 @@
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router' //navigation doesn't work
+import { useSession } from 'next-auth/react';
 import { useEffect, useReducer } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
 import Layout from '@/components/Layout'
-//import Order from '@/models/Order'
 import { getError } from '@/utils/error'
 
 
-function reducer(state, action) {
+interface OrderState {
+  loading: boolean;
+  error: string;
+  order: {
+  _id?: string;
+  shippingAddress?: string;
+  paymentMethod?: string;
+  orderItems?: [];
+  itemsPrice?: number;
+  taxPrice?: number;
+  shippingPrice?: number;
+  totalPrice?: number;
+  isPaid?: boolean;
+  paidAt?: string;
+  isDelivered?: boolean;
+  deliveredAt?: string;
+  };
+}
+
+type OrderAction =
+  | { type: 'FETCH_REQUEST' }
+  | { type: 'FETCH_SUCCESS'; payload: OrderState['order'] }
+  | { type: 'FETCH_FAIL'; payload: string };
+
+
+function reducer(state: OrderState, action: OrderAction) {
   switch(action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -21,10 +47,11 @@ function reducer(state, action) {
 }
 
 function OrderScreen() {
-  const query = useRouter();
-  //query or {query}
-  //const orderId = parseInt(query.toString());
-  const orderId = query.id;
+  const { data: session } = useSession();
+
+  const { query } = useRouter();
+  console.log(query)
+  const orderId = query?.id;
 
   const [{ loading, error, order }, dispatch, ] = useReducer(reducer, {
     loading: true,
@@ -63,7 +90,7 @@ function OrderScreen() {
 
   return (
     <Layout title={`Order ${orderId}`}>
-      <h1>{`Order : ${orderId}`}</h1>
+      <h1 className="m-2">{`Order : ${orderId}`}</h1>
       {loading ? (
       <div>Loading...</div>
       ) : error ? (
@@ -111,24 +138,27 @@ function OrderScreen() {
                 </tr>
               </thead>
 
-              <tbody className="m-auto border">
+              <tbody>
                 {orderItems.map((item) => (
-                  <tr key={item._id}>
+                  <tr key={item._id} className="border-b">
                     <td>
-                      <a href={`/product/${item.slug}`}>
+                      <a href={`/product/${item.slug}`} className="flex items-center">
                         <Image
                           src={item.image}
                           width={50}
                           height={50}
                           alt={item.name}
-                          className="m-auto"
+                          style={{
+                            maxWidth: '100%',
+                            height: 'auto',
+                          }}
                         />
-                        <span className="ml-1 text-xs">{item.name}</span>
+                        {item.name}
                       </a>
                     </td>
-                    <td className="p-5 text-right">{item.quantity}</td>
-                    <td className="p-5 text-right">${item.price}</td>
-                    <td className="p-5 text-right">${item.quantity * item.price}</td>
+                    <td className="p-5 text-center">{item.quantity}</td>
+                    <td className="p-5 text-center">${item.price}</td>
+                    <td className="p-5 text-center">${item.quantity * item.price}</td>
                   </tr>
                 ))}
               </tbody>
@@ -136,7 +166,7 @@ function OrderScreen() {
           </div>
         </div>
 
-        <div className="m-4 p-4 border rounded-lg">
+        <div className="card p-5">
           <h2 className="text-xl py-1 font-bold">Order Summary</h2>
           <ul>
             <li>
@@ -162,6 +192,14 @@ function OrderScreen() {
                 <div className="text-xl font-bold">Total: &nbsp;</div>
                 <div className="text-xl font-bold">${totalPrice}</div>
               </div>
+            </li>
+            <li className="flex w-full mt-2">
+              <Link
+                href={'/'}
+                className="paypal-button w-full text-center"
+              >
+                Paypal
+              </Link>
             </li>
           </ul>
         </div>

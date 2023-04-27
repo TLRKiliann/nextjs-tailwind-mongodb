@@ -53,10 +53,10 @@ export default function RegisterScreen() {
         className="mt-20 mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-2xl text-slate-500">Create Account</h1>
+        <h1 className="mb-4 text-2xl text-slate-400">Create Account</h1>
         
         <div className="mb-4">
-          <label htmlFor="name">name</label>
+          <label htmlFor="name">Name</label>
           <input type="text"
             {...register('name', {required: "Please enter name"})}
             className="w-full" id="name" autoFocus />
@@ -144,13 +144,13 @@ export default function RegisterScreen() {
         
         <div className="flex items-center justify-start">
           <p className="text-orange-400">
-            Don't have an account ?
+            Don't want to register ?
           </p>
           <Link 
-            href={`/register?redirect=${redirect || '/'}`}
+            href={'/'}
             className="px-4 text-lg text-red-400 hover:text-green-400"
           >
-            Register
+            Go back to Shop
           </Link>
         </div>
 

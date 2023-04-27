@@ -17,13 +17,12 @@ export default function LoginScreen() {
 
   const router = useRouter();
   const { redirect } = parseInt(router.query as string);
-  //const redirect = router.query;
 
   useEffect(() => {
     if (user?.user) {
       router.push(redirect || '/');
     }
-  }, [router,user, redirect])
+  }, [router, user, redirect])
 
   const { handleSubmit, register, formState: { errors }, } = useForm<LoginFormInputs>();
 
@@ -47,7 +46,7 @@ export default function LoginScreen() {
         className="mt-20 mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-2xl text-slate-500">Login</h1>
+        <h1 className="mb-4 text-2xl text-slate-400">Login</h1>
         
         <div className="mb-4">
           <label htmlFor="email">Email</label>

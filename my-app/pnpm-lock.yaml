@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@fontsource/acme':
+    specifier: ^4.5.10
+    version: 4.5.10
   '@headlessui/react':
     specifier: ^1.7.13
     version: 1.7.13(react-dom@18.2.0)(react@18.2.0)
@@ -105,6 +108,10 @@ packages:
   /@eslint/js@8.35.0:
     resolution: {integrity: sha512-JXdzbRiWclLVoD8sNUjR443VVlYqiYmDVT6rGUEIEHU5YJW0gaVZwV2xgM7D4arkvASqD0IlLUVjHiFuxaftRw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: false
+
+  /@fontsource/acme@4.5.10:
+    resolution: {integrity: sha512-yGt8yeaUGgjbuRei+dRE4hO7E1nxXxXk9cBJv6wFMzIqCxUhfkidS+WNRpd40HUROtLbX1t7KJp5SCfcMjfKRA==}
     dev: false
 
   /@headlessui/react@1.7.13(react-dom@18.2.0)(react@18.2.0):
