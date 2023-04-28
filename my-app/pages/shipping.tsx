@@ -16,8 +16,8 @@ type FormValues = {
 }
 
 export default function ShippingScreen() {
-  const { handleSubmit, register, formState: {errors}, setValue } = useForm<FormValues>()
 
+  const { handleSubmit, register, formState: {errors}, setValue } = useForm<FormValues>()
   const { state, dispatch } = useContext<StoreContextValue | undefined>(Store)
   const { cart }: State = state;
   const { shippingAddress } = cart;

@@ -14,7 +14,6 @@ type LoginFormInputs = {
 
 export default function LoginScreen() {
   const { data: user } = useSession();
-
   const router = useRouter();
   const { redirect } = parseInt(router.query as string);
 

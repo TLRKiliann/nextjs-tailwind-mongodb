@@ -1,8 +1,8 @@
 # Nextjs TypeScript Tailwind Darkmode Mongoose
 
-1. Installation
+Next.js version 13.2
 
-Official Documentation + module pnpm
+1. Installation
 
 └─ $ ▶ pnpm create next-app --typescript
 
@@ -16,13 +16,27 @@ Official Documentation + module pnpm
 
 └─ $ ▶ pnpm install @headlessui/react
 
+└─ $ ▶ pnpm install react-toastify
+
+└─ $ ▶ pnpm install @fontsource/acme
+
 └─ $ ▶ pnpm install axios
+
+└─ $ ▶ pnpm install mongoose
+
+└─ $ ▶ npm install next-auth
+
+└─ $ ▶ pnpm install @types/bcryptjs
+
+└─ $ ▶pnpm install @types/js-cookie
+
+└─ $ ▶ pnpm install react-hook-form
 
 ---
 
 2. To use it
 
-└─ $ ▶ git clone ...
+└─ $ ▶ git clone [key_link]
 
 └─ $ ▶ cd next-tailwind-mongodb/my-app
 
@@ -119,9 +133,7 @@ This component allow you to click img to go to `pages/product/[slug].tsx` or to 
 
 ---
 
----
-
-8. Handle add to Cart
+7. Store.tsx (utils/Store.tsx)
 
 - define react context
 - define cart item state
@@ -132,6 +144,8 @@ This component allow you to click img to go to `pages/product/[slug].tsx` or to 
 
 utils/Store
 
+`pages/index.tsx`
+
 `components/ProductItem.tsx (from pages/index.tsx)`
 
 `pages/product/[slug].tsx`
@@ -140,9 +154,95 @@ utils/Store
 
 ---
 
-9. Authentication
+8. Authentication
 
-.env
+Auth from `_app.tsx` is the provider which interact with the API `pages/auth/[...nextauth].ts`, db `utils/db.ts` & useSession()
+login.tsx).  
 
 data.ts
 
+.env => MONGODB_URI
+
+- useSession:
+
+`pages/order/[id].tsx` (useSession)
+
+`components/Layout.tsx` (useSession to manage session.user.name with status)
+
+`pages/login.tsx` (useSession) email, password of user to work with signin from next/auth.
+
+`pages/register.tsx` (useSession)
+
+`pages/api/auth/signup.ts` (useSession)
+
+- getToken:
+
+`pages/api/auth/[...nextauth].ts` (getToken)
+
+`pages/api/orders` => all files use getToken (getSession into the past)
+
+---
+
+9. Regitrer
+
+login.tsx, the "check out" btn (cart.tsx (if user not logged in)) send you to register.tsx. 
+
+logout redirect user to main page '/'.
+
+---
+
+10. CheckoutWizard.tsx
+
+- pages/shipping.tsx
+- pages/payment.tsx
+- pages/pllaceorder.tsx
+
+---
+
+11. Security
+
+Cookie:
+
+- utils/Store.tsx
+- pages/shipping.tsx
+- pages/payment.tsx
+- pages/placeorder.tsx
+
+---
+
+JWT (Json Web Token) getToken from next-auth/jwt:
+
+- pages/api/[...nextauth].ts (use JWT strategy)
+- pages/api/orders/index.ts 
+- pages/api/orders/[id].ts
+
+---
+
+bcryptjs:
+
+- pages/api/auth/[...nextauth].ts => bcryptjs.compareSync(credentials.password, user.password)
+- pages/api/signup.ts => bcryptjs.hashSync(password)
+- data.ts => bcrypt.hashSync('XXXXXXXXX') for password
+
+---
+
+TypeScript:
+
+- TS is installed with present app.
+- type/StoreType.ts
+
+---
+
+getError():
+
+- utils/error.ts
+- pages/placeorder.tsx
+- pages/order/[id].tsx
+- pages/login.tsx
+- pages/register.tsx
+
+---
+
+If status === false (useSession) in `pages/_app.tsx`
+
+`pages/unauthorized.tsx`
