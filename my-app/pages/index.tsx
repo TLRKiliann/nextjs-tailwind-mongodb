@@ -40,7 +40,6 @@ export default function Home({ products }: AllProductsProps) {
     if (data.countInStock < quantity) {
       return toast.error("Sorry no more in stock")
     }
-
     dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
     toast.success("Product added to cart !")
   }

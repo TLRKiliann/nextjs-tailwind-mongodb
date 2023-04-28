@@ -1,6 +1,4 @@
-# Nextjs TypeScript Tailwind Darkmode (like Amazon)
-
-## On The Road Again (OTRA)
+# Nextjs TypeScript Tailwind Darkmode Mongoose
 
 1. Installation
 
@@ -16,9 +14,38 @@ Official Documentation + module pnpm
 
 └─ $ ▶ pnpm install react-icons --save
 
+└─ $ ▶ pnpm install @headlessui/react
+
+└─ $ ▶ pnpm install axios
+
 ---
 
-2. Configuration
+2. To use it
+
+└─ $ ▶ git clone ...
+
+└─ $ ▶ cd next-tailwind-mongodb/my-app
+
+└─ $ ▶ pnpm install
+
+add file .env & fill it with :
+
+```
+MONGODB_URI=...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=...
+```
+
+`MONGODB_URI` is the URI of your database.
+
+mongodb+srv://username:XXXXXXXXXXX@cluster0.XXXXXX.mongodb.net/projectname?retryWrites=true&w=majority
+
+Replace username and projectname by yours from MongoDB.
+
+---
+
+3. Style Configuration
 
 Look at :
 
@@ -28,37 +55,73 @@ Look at :
 
 `styles/globals.css`
 
+`tailwind.config.js`
+
+`ThemeColor.tsx`
+
+& icons with react-icons
+
 ---
 
-3. Layout
+4. Layout
 
 `components/Layout.tsx`
 
-SuperHeader set title for all pages
+children & title are managed by this component for all pages.
 
-Layout (with navbar)
+cartItemsCount managed by useState to reset or not cart, 
 
-main
+useContext() call cart from `utils/Store.tsx`
 
-footer
+cart.cartItems are managed with useEffect() by using reduce() & setCartItemsCount.
+
+```
+cartItems: {
+  countInStock: number;
+  quantity: number;
+  name: string;
+  slug: string;
+  image: string;
+  price: number;
+}
+```
+
+(You can find all items in `type/StoreType.ts`)
+
+useSession() manage user connection with `auth` in `_app.tsx`
+
+SuperHeader.tsx => adapt title for all pages
+
+ToastContainer (when user add a product in cart, a msg appear)
+
+DropdownLink when user (`session.user.name`) is connected
+(profile, list of products, logout)
 
 ---
 
-4. Product
+5. Index.tsx
+
+Display all product with `components/ProductItem`
+
+useContext() to manage cart, `cartItems.quantity` (state) from `utils/Store.tsx`
+
+call API to call product by `_id`. The underscore id is an id managed with database (make a difference with id of the app).
+
+---
+
+6. ProductItem.tsx & product
 
 components/ProductItem.tsx
 
-Interact with db in `utils/data.ts` and called by `index.tsx`
+Interact with db managed by `index.tsx` with `utils/Store.tsx`.
+
+This component allow you to click img to go to `pages/product/[slug].tsx` or to add product in your cart.
 
 ---
 
-5. pages/product/[slug].tsx
-
-To display product by name & access to it by a new route.
-
 ---
 
-6. Handle add to Cart
+8. Handle add to Cart
 
 - define react context
 - define cart item state
@@ -77,12 +140,9 @@ utils/Store
 
 ---
 
-## Installation DropdownLink for name (after login).
+9. Authentication
 
-└─ $ ▶ pnpm install @headlessui/react
+.env
 
-Files concerned :
+data.ts
 
-`Layout.tsx`
-
-`DropdownLink.tsx`
