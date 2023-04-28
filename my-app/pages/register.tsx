@@ -18,7 +18,6 @@ export default function RegisterScreen() {
 
   const router = useRouter();
   const { redirect } = parseInt(router.query as string);
-  //const redirect = router.query;
 
   useEffect(() => {
     if (session?.user) {
@@ -67,7 +66,6 @@ export default function RegisterScreen() {
             )}
         </div>
 
-
         <div className="mb-4">
           <label htmlFor="email">Email</label>
           <input type="email"
@@ -84,8 +82,6 @@ export default function RegisterScreen() {
               </div>
             )}
         </div>
-
-
 
         <div className="mb-4">
           <label htmlFor="password">Password</label>
@@ -105,7 +101,6 @@ export default function RegisterScreen() {
               </div>
             )}
         </div>
-
 
         <div className="mb-4">
           <label htmlFor="confirmPassword">Confirm Password</label>
@@ -131,7 +126,6 @@ export default function RegisterScreen() {
               </div>
             )}
         </div>
-
 
         <div className="mb-4">
           <button

@@ -56,7 +56,7 @@ export default function ProductScreen(props: ProductProps) {
           Back to products
         </Link>
       </div>
-      <div className="md:ml-12 ml-1 grid md:grid-cols-4 md:gap-3">
+      <div className="mb-4 md:ml-12 ml-1 grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
           <Image
             src={product.image}

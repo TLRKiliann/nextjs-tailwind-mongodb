@@ -50,7 +50,7 @@ export default function Home({ products }: AllProductsProps) {
       <main>
 
         <h1 className="ml-4 text-xl text-slate-500 font-semibold dark:text-cyan-400">
-          NextJS TypeScript Tailwind & next-themes
+          NextJS TypeScript Mongoose Tailwind & next-themes
         </h1>
 
         <h2 className="mt-1 ml-4 text-lg text-slate-500 dark:text-slate-400">E-commerce NextJS</h2>

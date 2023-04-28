@@ -7,7 +7,6 @@ import axios from 'axios'
 import Layout from '@/components/Layout'
 import { getError } from '@/utils/error'
 
-
 interface OrderState {
   loading: boolean;
   error: string;
@@ -142,7 +141,7 @@ function OrderScreen() {
                 {orderItems.map((item) => (
                   <tr key={item._id} className="border-b">
                     <td>
-                      <a href={`/product/${item.slug}`} className="flex items-center">
+                      <a href={`/product/${item.slug}`} className="px-4 flex items-center text-sm">
                         <Image
                           src={item.image}
                           width={50}

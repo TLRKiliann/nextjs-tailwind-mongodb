@@ -41,7 +41,7 @@ export default function Layout({ title, children }: PropsValues) {
 
       <ToastContainer position="bottom-center" limit={1} />
 
-      <div className="flex min-h-screen flex-col justify-between bg-gradient-to-r from-slate-300 to-slate-100
+      <div className="flex min-h-screen flex-col justify-between
         dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-700">
         
         <header>

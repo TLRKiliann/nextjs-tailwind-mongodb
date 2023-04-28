@@ -30,7 +30,7 @@ const CartScreen = () => {
 
   return (
     <Layout title="Shopping Cart">
-      <h1 className="mx-4 text-xl font-bold text-slate-500">Shopping Cart</h1>
+      <h1 className="mx-4 text-xl text-slate-400">Shopping Cart</h1>
       {
         cartItems.length === 0 ? (
         <div className="m-4">
@@ -93,7 +93,7 @@ const CartScreen = () => {
                       ${item.price}
                     </td>
                     <td className="p-5 text-center">
-                      <button type='button' onClick={() => removeItemHandler(item)}>
+                      <button title="Remove" type='button' onClick={() => removeItemHandler(item)}>
                         <AiOutlineExclamationCircle className="h-5 w-5" />
                       </button>
                     </td>

@@ -58,7 +58,7 @@ export default function PaymentScreen() {
                 type="radio"
                 checked={selectedPaymentMethod === payment}
                 onChange={() => setSelectedPaymentMethod(payment)}
-                className="my-2 px-2 text-lg"
+                className="px-2 text-lg"
 
               />
               <label htmlFor={payment} className="m-4 text-lg font-bold">{payment}</label>
