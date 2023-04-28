@@ -2,9 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 
-
 export default function Unauthorized() {
-
   const router = useRouter()
   const message = router.query
 
