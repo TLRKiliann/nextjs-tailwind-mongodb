@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Link from 'next/link';
 import { signin, useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -13,7 +14,7 @@ type FormValues = {
   confirmPassword: string;
 };
 
-export default function ProfileScreen = () => {
+export default function ProfileScreen() {
   const { data: session } = useSession()
 
   const { handleSubmit, register, getValues, setValue, formState } = useForm<FormValues>();
@@ -24,7 +25,7 @@ export default function ProfileScreen = () => {
     setValue("email", session.user.email)
   }, [session.user, setValue]);
 
-  const handleSubmit = async ({name, email, password}: FormValues) => {
+  const submitHandler = async ({name, email, password}: FormValues) => {
     try {
       await axios.put('/api/auth/update', {
         redirect: false,
@@ -49,10 +50,9 @@ export default function ProfileScreen = () => {
     <Layout title="Profile">
 
       <form onSubmit={() => handleSubmit(submitHandler)}
-        className="mx-auto max-w-screen-md">
+        className="mx-auto mt-20 max-w-screen-md">
 
         <h1 className="mb-4 text-xl">Update Profile</h1>
-
 
         <div className="mb-4">
           <label htmlFor="name">Name</label>
@@ -140,18 +140,6 @@ export default function ProfileScreen = () => {
           >
             Update
           </button>
-        </div>
-        
-        <div className="flex items-center justify-start">
-          <p className="text-orange-400">
-            Don't have an account ?
-          </p>
-          <Link 
-            href={`/register?redirect=${redirect || '/'}`}
-            className="px-4 text-lg text-red-400 hover:text-green-400"
-          >
-            Register
-          </Link>
         </div>
 
       </form>
