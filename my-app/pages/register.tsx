@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import Layout from '@/components/Layout'
 import { getError } from '@/utils/error'
 
-type LoginFormInputs = {
+type FormValues = {
   email: string;
   password: string;
 };
@@ -25,9 +25,9 @@ export default function RegisterScreen() {
     }
   }, [router,session, redirect])
 
-  const { handleSubmit, register, getValues, formState: { errors }, } = useForm<LoginFormInputs>();
+  const { handleSubmit, register, getValues, formState: { errors }, } = useForm<FormValues>();
 
-  const submitHandler = async ({ name, email, password }: LoginFormInputs) => {
+  const submitHandler = async ({ name, email, password }: FormValues) => {
     try {
       await axios.post('/api/auth/signup', {
         name,
