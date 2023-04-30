@@ -1,64 +1,66 @@
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import { signIn, useSession } from 'next-auth/react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import Layout from '@/components/Layout'
-import { getError } from '@/utils/error'
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { signin, useSession } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { getError } from '@/utils/error';
+import axios from 'axios';
+import Layout from '@/components/Layout';
 
 type FormValues = {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
-export default function RegisterScreen() {
-  const { data: session } = useSession();
+export default function ProfileScreen() {
+  const { data: session } = useSession()
 
-  const router = useRouter();
-  const { redirect } = parseInt(router.query as string);
+  const { handleSubmit, register, getValues, setValue, formState } = useForm<FormValues>();
+  const { errors } = formState;
 
   useEffect(() => {
-    if (session?.user) {
-      router.push(redirect || '/');
-    }
-  }, [router,session, redirect])
+    setValue("name", session.user.name)
+    setValue("email", session.user.email)
+  }, [session.user, setValue]);
 
-  const { handleSubmit, register, getValues, formState: { errors }, } = useForm<FormValues>();
-
-  const submitHandler = async ({ name, email, password }: FormValues) => {
+  const submitHandler = async ({name, email, password}: FormValues) => {
     try {
-      await axios.post('/api/auth/signup', {
-        name,
+      await axios.put('/api/auth/update', {
+        redirect: false,
         email,
-        password
+        password,
       });
       const result = await signIn('credentials', {
         redirect: false,
         email,
         password,
       });
+      toast.success("Profile updated successfully")
       if (result?.error) {
         toast.error(result?.error);
       }
     } catch(err) {
       toast.error(getError(err));
     }
-  } 
+  };
+
   return (
-    <Layout title="Create Account">
-      <form
-        className="mt-20 mx-auto max-w-screen-md"
-        onSubmit={handleSubmit(submitHandler)}
-      >
-        <h1 className="mb-4 text-2xl text-slate-400">Create Account</h1>
-        
+    <Layout title="Profile">
+
+      <form onSubmit={() => handleSubmit(submitHandler)}
+        className="mx-auto mt-20 max-w-screen-md">
+
+        <h1 className="mb-4 text-xl">Update Profile</h1>
+
         <div className="mb-4">
           <label htmlFor="name">Name</label>
-          <input type="text"
-            {...register('name', {required: "Please enter name"})}
-            className="w-full" id="name" autoFocus />
+          <input type="text" 
+            {...register("name", {
+              required: "Please enter name"})}
+            className="w-full" id="name" autoFocus
+          />
             {errors.name && (
               <div className="text-red-500">
                 {errors.name.message}
@@ -75,7 +77,7 @@ export default function RegisterScreen() {
               message: "Please enter valid email",
             },
           })}
-            className="w-full" id="email" />
+            className="w-full" id="email" autoFocus />
             {errors.email && (
               <div className="text-red-500">
                 {errors.email.message}
@@ -106,25 +108,29 @@ export default function RegisterScreen() {
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input type="password" 
             {...register("confirmPassword", {
-              required: "Please confirm password",
+              required: "Please enter confirmPassword",
               validate: (value) => value === getValues('password'),
               minLength: {
                 value: 6,
-                message: "password is more than 5 chars"
+                message: "confirmPassword is more than 5 chars"
               },
             })}
             className="w-full" id="confirmPassword" autoFocus
           />
-          {errors.confirmPassword && (
-            <div className="text-red-500">
-              {errors.confirmPassword.message}
-            </div>
-          )}
-            {errors.confirmPassword && errors.confirmPassword.type === 'validate' && (
+            {errors.confirmPassword ? (
+              <div className="text-red-500">
+                {errors.confirmPassword.message}
+              </div>
+              ) : null
+            }
+
+            {errors.confirmPassword && 
+              errors.confirmPassword.type === "validate" ? (
               <div className="text-red-500">
                 Password do not match
               </div>
-            )}
+              ) : null
+            }
         </div>
 
         <div className="mb-4">
@@ -132,23 +138,12 @@ export default function RegisterScreen() {
             type="submit"
             className="secondary-button"
           >
-            Register
+            Update
           </button>
-        </div>
-        
-        <div className="flex items-center justify-start">
-          <p className="text-orange-400">
-            Don't want to register ?
-          </p>
-          <Link 
-            href={'/'}
-            className="px-4 text-lg text-red-400 hover:text-green-400"
-          >
-            Go back to Shop
-          </Link>
         </div>
 
       </form>
     </Layout>
   )
 }
+ProfileScreen.auth = true;

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import Layout from '@/components/Layout'
 import { getError } from '@/utils/error'
 
-type LoginFormInputs = {
+type FormValues = {
   email: string;
   password: string;
 };
@@ -23,9 +23,9 @@ export default function LoginScreen() {
     }
   }, [router, user, redirect])
 
-  const { handleSubmit, register, formState: { errors }, } = useForm<LoginFormInputs>();
+  const { handleSubmit, register, formState: { errors }, } = useForm<FormValues>();
 
-  const submitHandler = async ({ email, password }: LoginFormInputs) => {
+  const submitHandler = async ({ email, password }: FormValues) => {
     try {
       const result = await signIn('credentials', {
         redirect: false,

@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import bcryptjs from 'bcryptjs'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import bcryptjs from 'bcryptjs';
 import User from '@/models/User';
 import db from '@/utils/db';
 
